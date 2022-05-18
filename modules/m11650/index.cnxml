@@ -1,0 +1,30 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>OrCAD Introduction</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9710359b-2116-433f-abd6-bbf984623340</md:uuid>
+</metadata>
+
+<content>
+<note type="warning" id="idp693104">The Connexions version of the OrCAD tutorial is still in development. Please <link url="http://koala.ece.rice.edu/index.cfm?page=pub"> click here</link> for the original and complete tutorial. You may also browse this complete tutorial within Connexions by using the Mozilla browser and accessing the main Connexions page at <link url="http://cnx.rice.edu">http://cnx.rice.edu</link>.  Click on the 'Contents' tab and select Rice University ELEC 424/427 under the 'Courses' tab.</note>
+<section id="Intro">
+<title>Introduction</title>
+<para id="Introduction">
+<term>OrCAD</term> is a suite of tools from <link url="http://www.cadence.com">Cadence</link> for the design and layout of printed circuit boards (PCBs). This tutorial covers <emphasis>version 9.2</emphasis> of the OrCAD suite. This document will give you a crash course in designing an entire circuit board from start to finish. This will be a very small and simple circuit, but it will demonstrate the major concepts and introduce the tools behind completing a PCB design. After you have completed this tutorial, you will know all the steps needed to make PCBs using OrCAD. This is not, however, a guide to the inner workings of the OrCAD interface. You should use this document in conjunction with the online OrCAD help and tutorials.
+</para>
+</section>
+<para id="Intro2">
+The circuit you will design is shown in the figure below. The main component is a programmable logic device (PLD) from <link url="http://www.xilinx.com">Xilinx</link>. PLDs, as the name implies, are programmable devices that can be used for a variety of useful tasks, and it is useful to be familiar with using them. In this circuit, we will use the PLD to light up a 7-segment LED display that will be used as a counter. Also in the circuit: a power connector for a 9-volt battery, a header for general purpose IO, a pushbutton switch, a programming interface for the PLD, and some miscellaneous resistors and capacitors.
+</para>
+<figure id="Fig1">
+<media id="idp807248" alt=""><image src="../../media/ScreenHunter_013.jpg" mime-type="image/jpeg"/></media>
+<caption> The ciruit you will design in this tutorial.</caption>
+</figure>
+
+<para id="Intro3">
+OrCAD really consists of two tools. <term>Capture</term> is used for design entry in schematic form. You will probably be already familiar with looking at circuits in this form from working with 
+other tools in your university courses. <term>Layout</term> is a tool for designing the physical layout of components and circuits on a PCB. During the design process, you will move back and forth between these two tools.
+</para>
+<note type="warning" id="idp162752">Save your work frequently while working on this tutorial. You will not be reminded to do so.</note>
+  
+  </content>
+  
+</document>

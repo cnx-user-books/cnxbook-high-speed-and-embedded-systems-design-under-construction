@@ -1,0 +1,47 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Starting a New Schematic Entry in OrCAD Capture</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>c14e03dc-1b57-4c3d-a5ea-4615f7e704e9</md:uuid>
+</metadata>
+
+  <content>
+<note type="warning" id="idp771344">The Connexions version of the OrCAD tutorial is still in development. Please <link url="http://koala.ece.rice.edu/index.cfm?page=pub"> click here</link> for the original and complete tutorial. You may also browse this complete tutorial within Connexions by using the Mozilla browser and accessing the main Connexions page at <link url="http://cnx.rice.edu">http://cnx.rice.edu</link>.  Click on the 'Contents' tab and select Rice University ELEC 424/427 under the 'Courses' tab.</note>
+    <section id="BeforeYouBegin">
+<title>Before You Begin</title>
+<para id="Before1">
+It is helpful to be very organized when you are designing. OrCAD will create many files and if you keep all of them in the same directory, it can quickly become very confusing. I like to make a directory hierarchy and put associated files into subdirectories. Before beginning, navigate to the directory in which you will keep your project and create the following subdirectories:
+<list id="subdirectories">
+<item><code>sch</code> - for your schematics.</item>
+<item><code>lib</code> - for symbol and footprint libraries.</item>
+<item><code>board</code> - for your board files.</item>
+<item><code>comps</code> - for component datasheets.</item>
+<item><code>assy</code> - for assembly related documents.</item>
+</list>
+For larger designs, more subdirectories would be desirable, but these will be sufficient for this project.
+</para>
+</section>
+
+<section id="StartSch">
+<title>Starting a New Schematic Entry</title>
+<para id="StartSch1">
+To create a new project, first start OrCAD Capture and click <term>File--&gt;New--&gt;Project</term>. You will see the following dialog box.
+</para>
+</section>
+
+<figure id="fig2">
+<media id="idp2160928" alt=""><image src="../../media/NewProjectDialog.gif" mime-type="image/gif"/></media>
+<caption>New project dialog</caption>
+</figure>
+
+
+<para id="StartSch2">
+Browse to the <code>sch</code> directory that you created and name the project <term>Elec424Tutorial</term>. You now have an empty project workspace. You should see 
+an empty schematic page and a project window like the following.
+</para>
+
+<figure id="fig3">
+<media id="idm7623280" alt=""><image src="../../media/ProjectWorkspace.gif" mime-type="image/gif" width="600"/></media>
+<caption>The project workspace</caption>
+</figure>  
+  </content>
+  
+</document>

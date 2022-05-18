@@ -1,0 +1,115 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Creating Schematic Symbols in OrCAD Capture</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f588bae3-0bb8-40b3-8902-0937480f0668</md:uuid>
+</metadata>
+
+<content>
+<note type="warning" id="idp890272">The Connexions version of the OrCAD tutorial is still in development. Please <link url="http://koala.ece.rice.edu/index.cfm?page=pub"> click here</link> for the original and complete tutorial. You may also browse this complete tutorial within Connexions by using the Mozilla browser and accessing the main Connexions page at <link url="http://cnx.rice.edu">http://cnx.rice.edu</link>.  Click on the 'Contents' tab and select Rice University ELEC 424/427 under the 'Courses' tab.</note>
+<para id="CreateSchSym1">
+To add a new part to your library, right-click the library file and select <term>New Part</term>. This will bring up a dialog box for 
+<term>New Part Properties</term>, which looks like this.
+</para>
+
+<figure id="fig1">
+<media id="idm1148352" alt=""><image src="../../media/NewPartDialog.gif" mime-type="image/gif"/></media>
+<caption>New part properties dialog box</caption>
+</figure>
+
+<para id="CreateSchSym2">
+We will be making a symbol for the Xilinx XC9536 PLD. This part comes in a 44-pin PLCC package. Name the part <term>XC9536-PLCC44</term>. Leave the <term>Part Reference Prefix</term> as <term>U</term> . You can leave the default values for all the other settings. Click OK to bring up the workspace for part creation. It should look like the picture below. Tools for working with the part 
+are located on the toolbar on the right-hand side of the screen.
+</para>
+
+<figure id="fig2">
+<media id="idm7054352" alt=""><image src="../../media/PartWorkspace.gif" mime-type="image/gif" width="700"/></media>
+<caption>Creating a new part</caption>
+</figure>
+
+<para id="CreateSchSym0"><note id="idm7485792">Part Reference Prefixes (also known as Reference Designators) help categorize parts in your schematics and PCB layouts. For example, C is used for capacitors, R for resistors, L for inductors, U for ICs, and X for crystals. These reference designators were originally defined in ANSI standards Y32.2 and Y32.16, which was replaced by IEEE 200. This standard has since been replaced by IEEE 315, "Graphic Symbols for Electrical and Electronics Diagrams (Including Reference Designation Letters)". There is also an IEC standard, 61346-1.
+</note>
+</para>
+
+<para id="CreateSchSym3">
+To get started, drag the dashed line on the workspace to make it a little larger. You won't be able to fit too many pins on the part with its 
+current size. When it is large enough, use the <term>Place Rectangle</term> tool to draw a solid outline in the same place as the dashed line. Use the <term>Place Pin</term> tool to place pins on the part. <figure orient="horizontal" id="horfig"> <subfigure id="subfig1"> <media id="idp2117648" alt=""><image src="../../media/PlaceRectangle.gif" mime-type="image/gif"/></media>
+<caption>Place Rectangle Button</caption>
+</subfigure>
+<subfigure id="subfig2">
+<media id="idm8101200" alt=""><image src="../../media/PlacePin.gif" mime-type="image/gif"/></media>
+<caption>Place Pin Button</caption>
+</subfigure>
+</figure>
+</para>
+
+<para id="CreateSchSym4">
+You will see a dialog that looks like this.
+</para>
+
+<figure id="fig3">
+<media id="idm882176" alt=""><image src="../../media/PlacePinDialog.gif" mime-type="image/gif"/></media>
+<caption>Place pin dialog box</caption>
+</figure>
+
+<para id="CreateSchSym5">
+Refer to the part datasheet for the correct pin numbers for the PC44 package. You can either download the datasheet from the <link url="http://www.xilnix.com">Xilinx</link> web site or from <link resource="XC9536.pdf">here</link>
+
+<note type="important" id="idp6341344">For real-world designs, it is always recommended that you obtain the latest datasheet from the manufacturer's web site</note>
+</para>
+
+
+<para id="CreateSchSym7">
+The default pin <term>Shape</term> (<term>Line</term>) and <term>Type</term> (<term>Passive</term>) are OK for most pin 
+types. For clocks and active low signals you may want to use some of the other shapes. You will also want to use the type <term>Power</term> for power pins. 
+When you do this, make sure that the <term>Pin Visible</term> check box is checked. Also, I usually like to place my power pins near the top of the part and ground pins near the bottom. As a last touch, double-click the text that reads <term>&lt;value&gt;</term> and change it to read <term>XC9536-PLCC44</term>. When you are all done, your part should look something like the following symbol.
+</para>
+
+<figure id="fig4">
+<media id="idm7046944" alt=""><image src="../../media/XilinxPart.gif" mime-type="image/gif"/></media>
+<caption>The finished PLD schematic symbol</caption>
+</figure>
+
+<para id="CreateSchSym8">
+Save your part and close the window. You may get a warning about duplicate pin names, but that is OK to ignore. Your part will now be visible in your library.
+</para>
+
+<para id="CreateSchSym9">
+Some parts are already in existing OrCAD libraries. It is usually OK to copy these parts for use in your own design. For example, let’s say we want to use a simple resistor
+ in our design. First, we need to open the library that contains the resistor. To do this, select <term>File--&gt;Open--&gt;Library</term>. OrCAD keeps all of its 
+libraries in the path:
+</para>
+
+<para id="CreateSchSym10">
+<code>C:\Program Files\OrCAD\Capture\Library</code>
+</para>
+
+<para id="CreateSchSym11">
+Select the library called <code>Discrete</code>. This will open up a new window showing the contents of the library. Find the part called <term>R</term>
+ and highlight it. This is our resistor. Select <term>Edit--&gt;Copy</term> from the menu and then highlight your own library. Select <term>Edit--&gt;Paste
+</term> from the menu and this will paste the part into your library.
+</para>
+
+<para id="CreateSchSym12">
+When you do this, some extra parts will show up in your library. These are part aliases (the same part but with a different name). You can tell the aliases by the ‘-‘ that 
+is inside the little gate next to the part name. You don’t need the aliases they will just cause confusion. Delete them from your library.
+</para>
+
+<para id="CreateSchSym13">
+I have provided a library of the remaining parts for use in this design. Open this library file and copy the all the parts into your library. You can find this library on Owlnet 
+at:
+</para>
+
+<para id="CreateSchSym14">
+<code>/home/jpfrantz/elec424/tutorial/lib/tutorial.lib</code>
+</para>
+
+<para id="CreateSchSym15"><note id="idm6569264">There are a few things to note about copying parts from existing libraries. First, always be sure to check the part you are copying against a datasheet for correct 
+pinout, number of pins, etc. Second, some of the standard parts will have power pins that are invisible. Personally, I feel that this is a very bad design practice that can 
+lead to errors in your design. If you copy a part that has invisible power pins, please be sure to make them visible. Trust me, this can save you a lot of pain and trouble 
+later. Finally, beware of so-called “heterogeneous” parts. These parts split across multiple symbols. For example, you might see a part with general pins on one symbol 
+and power pins on another. In general, heterogeneous parts should be avoided because they can cause problems. However, they may be acceptable for very large parts 
+such as processors.
+</note>
+</para>
+</content>
+  
+</document>

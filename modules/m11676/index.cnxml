@@ -1,0 +1,633 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Starting Layout in OrCAD</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>d381082d-4c76-4bab-8933-7306c5bf7b9c</md:uuid>
+</metadata>
+
+<content>
+<note type="warning" id="idp267792">The Connexions version of the OrCAD tutorial is still in development. Please <link url="http://koala.ece.rice.edu/index.cfm?page=pub"> click here</link> for the original and complete tutorial. You may also browse this complete tutorial within Connexions by using the Mozilla browser and accessing the main Connexions page at <link url="http://cnx.rice.edu">http://cnx.rice.edu</link>.  Click on the 'Contents' tab and select Rice University ELEC 424/427 under the 'Courses' tab.</note>
+<section id="CreatingNew">
+<title>Creating a New Board</title>
+<para id="CreatingNew1">
+You have everything that you need to import your design into Layout. We need to do one thing before we begin. Layout will try to match the names of the footprints in your netlist with those stored in the <term>Library Manager</term>. Your library must be at the top of the list in <term>Library Manager</term> or the import will not work. Open <term>Library Manager</term> and make sure that your library appears at the top of the list like in the figure below.
+</para>
+
+<figure id="fig1">
+<media id="idp303280" alt=""><image src="../../media/Libraries.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="CreatingNew2">
+Now start Layout and select <term>File--&gt;New</term>. You will first be prompted for the template file you created. It should be located in your <term><code>board</code></term> directory. Second, you will be asked for your netlist. This should be located in your <term><code>sch</code></term> directory. Third, you will be asked to give your board file a name. Name this file <term>Elec424Tutorial</term> and place it in the <term><code>board</code></term> directory.
+</para>
+
+<para id="CreatingNew3">
+If all the footprint names in your design match those in your library, then you should get no errors and you will see a screen in layout like the one below.
+</para>
+
+<para id="CreatingNew4">
+If you got one or more errors, then it probably means that you have a misspelled footprint name. Sometimes, you can also accidentally assign a footprint that doesn’t have the same number of pins as your schematic symbol. If your import is unable to complete, then you will have to find the problem and start the process again.
+</para>
+
+<figure id="fig2">
+<media id="idp414080" alt=""><image src="../../media/NewLayout.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="CreatingNew5">
+One useful tool for finding an error is the <term><code>lis</code></term> file. When Layout performed the import, it generated a file called <term>Elec424Tutorial.lis</term> in your board directory. Open this file in a text editor like Notepad to see what it looks like. This file will tell you everything that occurred during the import: what footprints were added or deleted, what components were added or deleted, and what nets were added or deleted (you will see later how footprints, components and nets get deleted). If an error occurred, you will see it here, probably towards the end of the file.
+</para>
+</section>
+
+<section id="Getting">
+<title>Getting Around &amp; Placing Parts</title>
+<para id="Getting1">
+All of your parts from schematics should be line up on the left side of the board. Before we start placing them, let’s do a few things to make our job a little easier. First, turn off DRC (Design Rule Checking). 
+
+<figure id="fig3">
+<media id="idp319056" alt=""><image src="../../media/DRC.gif" mime-type="image/gif"/></media>
+</figure>
+
+We will use it later when routing, but not now. When you do this, the box with the dashed line border will disappear. Second, I like to turn off a few layers at this point, just to make the screen a little easier to look at. You will notice a drop down box with the <term>TOP</term> layer listed. This box lets you select the active layer.
+</para> 
+
+<para id="note1"><note id="idp145072">Layout has many shortcut keys to help you move around the program. They are extremely useful, and I encourage you to be familiar with them. For a complete description, search the help file for <term>keyboard shortcuts</term>.</note>
+</para>
+
+
+<figure id="fig4">
+<media id="idm225040" alt=""><image src="../../media/LayerDropDownBox.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Getting2">
+While a layer is active, you can press the ‘-‘ key to make it visible or invisible. Try it now for the top layer. Your screen should look a little different, and the coloring in the drop down box will change to indicate that the layer is now invisible.
+</para>
+
+<figure id="fig5">
+<media id="idp345504" alt=""><image src="../../media/LayerDropDownBoxInvis.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Getting3">
+Make the top layer visible again. You will want to see that one while placing parts and routing. For now, select the following layers and make them invisible: <term>SMTOP</term>, <term>SMBOT</term>, <term>AST</term>, <term>ASB</term>, <term>DRD</term>, <term>DRL</term>. You will also notice that there are a bunch of lines connecting your parts. These are connections that are still unrouted, and this is usually referred to as the ratsnest. When placing parts, it is sometimes useful to turn this off. So click the <term>View Spreadsheet</term> icon and select <term>Nets</term>. Remember when you used this spreadsheet before? It had just one net called <term>DEFAULT</term>. Now, every net in your design should appear in this spreadsheet. This spreadsheet can be a useful way to see if you have misnamed nets in your schematics. Highlight every net by clicking the cell labeled <term>Net Name</term>. Right-click and choose <term>Properties</term>. Uncheck the <term>Routing Enabled</term> box and click <term>OK</term>. The ratsnest should have disappeared.
+</para>
+
+<figure id="fig6">
+<media id="idp394464" alt=""><image src="../../media/NewLayoutNoRatsnest.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Getting4">
+You are now ready to place parts on your design. To get into parts placement mode, make sure that the <term>Component Tool</term> is selected. 
+
+<figure id="fig7">
+<media id="idp330784" alt=""><image src="../../media/ComponentTool.gif" mime-type="image/gif"/></media>
+</figure>
+
+In addition to placing the components that are in your schematics, you can also place non-electrical components right in Layout. You will do that now to place some mounting holes on your board. While using the <term>Component Tool</term>, right-click and select <term>New</term> to bring up the <term>Add Component</term> dialog box.
+</para>
+
+<figure id="fig8">
+<media id="idp357104" alt=""><image src="../../media/AddComponent.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Getting5">
+Give this component a reference designator of <term>MT1</term>. Then click the <term>Footprint</term> button and select the <term>BUMPER</term> footprint from your library. Click <term>OK</term> when finished. The part will now be attached to your cursor and you can place it on the board. We actually want to place this mounting hole so that the large pad is on the bottom of the board. Press ‘<term>T</term>’ to flip the part to the other side of the board, and then place at the edge of the board in the lower left corner.
+</para>
+
+<figure id="fig9">
+<media id="idp12576" alt=""><image src="../../media/PlacingAMountingHole.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Getting6">
+We want to place a mounting hole in each corner of the board. You could go through the procedure that you just did to place this component, but there is an easier way that will also allow you to precisely place components. Click the <term>View Spreadsheet</term> icon and choose <term>Components</term> to open the components spreadsheet. Scroll down until you see the component you just placed, <term>MT1</term>.  Like in other spreadsheets, you can press <term>CTRL-C</term> to make a copy of the component. Do this 3 times to make components <term>MT2</term> to <term>MT4</term>. When you copy the component, it will be placed at 0,0, all three need to be moved. Double-click <term>MT2</term> to bring up the <term>Edit Component</term> dialog box.
+</para>
+
+<figure id="fig10">
+<media id="idm6931424" alt=""><image src="../../media/EditComponent.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Getting7">
+Change the coordinates for this part to 2800,200 and click <term>OK</term>. Now do the same for the other two parts and place them each 200 mils from the corners of the board. Before closing the spreadsheet, highlight all four parts using the <term>CTRL</term> key. Right-click and select <term>Properties</term> to bring up the <term>Edit Component</term> dialog again. Since these are non-electric parts, uncheck the box labeled <term>Non-Electric</term>. Also, we don’t want to accidentally move the part, so check the box labeled <term>Fixed</term> and the box labeled <term>Locked</term>. Finally, uncheck the box labeled <term>Route Enabled</term>. Click <term>OK</term> to close the dialog and then close the spreadsheet. Your board should now look like this.
+</para>
+
+<figure id="fig11">
+<media id="idm565600" alt=""><image src="../../media/LayoutMountingHolesPlaced.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Getting8">
+Now you can begin to place the rest of your components. You will probably want to print out your schematics so that you can see where the components are supposed to go in relation to each other. When you pick up a component, the ratsnest for that component will appear to show you the connections to other parts. If you want, you can also turn the ratsnest back on to see all of the connections. Personally, I like to turn on at least the power and ground nets and give them a distinct color, especially in designs with multiple voltages. Open the nets spreadsheet and find the net <term>GND</term>. Right-click and select <term>Change Color</term>. Choose any color you like. Right-click again and select <term>Enable &lt;-&gt; Disable</term>. When you close the spreadsheet, the GND net should be visible. Do the same thing for the other power nets. When you close the spreadsheet it will look a little messy. You can use the <term>Refresh All</term> icon to force OrCAD to redraw connections.
+</para>
+
+<figure id="fig12">
+<media id="idm357152" alt=""><image src="../../media/RefreshAll.gif" mime-type="image/gif"/></media>
+<caption>Refresh All Icon</caption>
+</figure>
+
+<para id="Getting9">
+When placing components, you may want to work on a finer grid. Right now, the grid is probably set at 100 mils. You can change this by selecting <term>Options--&gt;System Settings</term> and then changing the <term>Place Grid</term> setting. I usually use a value of 25. I also like to adjust the <term>Visible Grid</term> setting to give me an on-screen reference. I usually use a value of 50 when placing components.
+</para>
+
+<para id="Getting10">
+Start placing the remaining components on your board. Start with placing the power connector on the left side of the board, the PLD in the center, and TIL311 on the right.  Try to keep components that belong together near each other. When you are done, your board should look something like this.
+</para>
+
+<figure id="fig13">
+<media id="idm703248" alt=""><image src="../../media/LayoutCompsPlaced.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Getting11">
+The silkscreen is a bit messy, but we will deal with that later. In fact, during routing, the silkscreen can get in the way, so go ahead and turn off the <term>SST</term> layer now using the same method you used before for the other layers.
+</para>
+
+<para id="Getting12">
+Save your design. We have added a few components, so you may get the following warning.
+</para>
+
+<figure id="fig14">
+<media id="idm404272" alt=""><image src="../../media/SwapCaution.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Getting13">
+We will address this later. Do not worry about it now.
+</para>
+
+<para id="Getting14">
+<note type="warning" id="idm197376">
+OrCAD has a method to allow you to change your schematics while in Layout and to also make changes in Layout that will get sent back to Capture. Because of this, do not change your schematics until you are ready to re-export your design to Layout. If you make changes to both the schematics and the board layout at the same time, you will only make it difficult to reconcile the two.
+</note>
+</para>
+</section>
+
+<section id="Routing">
+<title>Routing Power, Ground &amp; Copper Pours</title>
+<para id="Routing1">
+In any design, it is usually wise to route all power and ground connections before anything else. On a thru-hole technology board, this is very easy because connections can be made to the solid plane as the pin passes through the board. The pin will be “flashed” to power or ground. We need to set up our design so that OrCAD knows that the two planes are associated with nets. Open the nets spreadsheet and find the net <term>GND</term>. Double-click to open the <term>Edit Net</term> dialog and click the button labeled <term>Net Layers…</term> Under the section <term>Plane Layers</term>, check the box labeled <term>GND</term>. This will inform OrCAD that the net <term>GND</term> is associated with the solid plane on layer 2. Do the same thing for the net <term>VCC5</term>. When you close the spreadsheet, click the <term>Refresh All</term> button. The ratsnests for <term>VCC5</term> and <term>GND</term> will disappear. This is because they are now connected to the plane layer. To see this, press <term>Backspace</term> to clear the screen, then press ‘<term>3</term>’ (the shortcut key for the ground layer) to view the ground layer.
+</para>
+
+<figure id="fig15">
+<media id="idp66752" alt=""><image src="../../media/LayoutGroundPlane.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Routing2">
+You can now see all of the connections to the ground plane. You can do the same thing for the power plane. Press ‘<term>F5</term>’ or the <term>Refresh All</term> button to make the whole design visible again.
+</para>
+
+<para id="Routing3">
+We still have one voltage net to route, and that is the input voltage from an external power supply. This net only touches a few components, so we could just put a trace to connect all the components. However, we can also draw a solid piece of copper and associate it with that net. This is especially useful for high-current traces or small voltage planes. We do this using the <term>Obstacle Tool</term> just like when drawing obstacles for footprints. Turn the <term>Obstacle Tool</term> on and then right-click anywhere in your design. Select <term>New…</term> and then right-click again and select <term>Properties…</term> to bring up the <term>Edit Obstacle</term> dialog. Name this obstacle VCC_IN, leave the Width at 10 mils. Set the Clearance to 15 mils Change the <term>Obstacle Type</term> to <term>Copper</term> pour. Finally, set the <term>Net Attachment</term> to the name of the net, which should be <term>V_IN</term>. Click <term>OK</term> and you are ready to draw your copper pour. Draw a rectangle around the power connector and other components that are attached to this net. When you are done, click <term>Refresh All</term> to redraw the ratsnests.
+</para>
+
+<figure orient="horizontal" id="horfig1">
+<subfigure id="subfig1">
+<media id="idm253344" alt=""><image src="../../media/LayoutCopperPour1.gif" mime-type="image/gif"/></media>
+</subfigure>
+
+<subfigure id="subfig2">
+<media id="idm6528240" alt=""><image src="../../media/LayoutCopperPour2.gif" mime-type="image/gif"/></media>
+</subfigure>
+</figure>
+
+<para id="Routing4">
+You have now routed all the power and ground connections. That was easy, right? Let’s look a little bit at some of the tools that OrCAD gives you to check on the progress of your design. Click the <term>View Spreadsheets</term> icon and choose <term>Statistics</term>. The statistics spreadsheet gives you information on time in layout, percent of components placed, percent of traces routed, and some other information. 
+</para>
+
+<figure id="fig16">
+<media id="idm471232" alt=""><image src="../../media/StatisticsSpreadsheet.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Routing5">
+100% of your components should be placed, and you can also see that a majority of your traces have been routed (power and ground make up the majority of connections in most designs). You are well on your way to completing your design.
+</para>
+</section>
+
+<section id="RoutingOther">
+<title>Routing Other Nets</title>
+<para id="RoutingOther1">
+You are now prepared to route the other connections on your board. Open the nets spreadsheet and highlight all the nets in the design. Right-click and select <term>Enable &lt;-&gt; Disable</term> to make the ratsnets visible for the remaining nets. Refresh the display to clean things up a bit.
+</para>
+
+<para id="RoutingOther2">
+Before beginning routing in earnest, it is helpful to change a few settings. Open the <term>System Settings</term> and make the following changes: <term>Visible Grid</term> = 10, <term>Routing Grid</term> = 5, and <term>Via Grid</term> = 0. Next, select <term>Options--&gt;User Preferences</term> and check <term>Allow DRC Errors</term> under <term>Global Preferences</term>. You may have to check the box labeled <term>Activate Online DRC</term>. The box with the dashed line will reappear. While DRC is on, you will only be able to place routes inside this box, but Layout will inform you if any spacing errors occur while you are routing. This will help you limit the number of errors that you will have to clean up later. You can resize the DRC box by pressing ‘<term>B</term>’ and drawing a new rectangle.
+</para>
+
+<para id="RoutingOther3">
+Let’s route a connection. Turn on the <term>Edit Segment Mode</term> or <term>Add/Edit Route Mode</term>. 
+
+<figure id="fig17">
+<media id="idm5945552" alt=""><image src="../../media/RouteModes.gif" mime-type="image/gif"/></media>
+<caption>Routing Mode Icons</caption>
+</figure>
+
+The two have some subtle differences. Experiment with both to see which one you are most comfortable with. Let’s start by routing the connection for the pushbutton switch. Zoom in a bit and click on the ratsnest near pin 4 of the switch. Left-click to place a segment of a route. When you get near to pin 3, you can press ‘<term>F</term>’ to have Layout finish the trace for you. Pins 3 and 4 should now be connected. Now connect the resistor and capacitor that are nearby.
+</para>
+
+<figure id="fig18">
+<media id="idm510288" alt=""><image src="../../media/FirstRoute1.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="RoutingOther4">
+When routing you will want to refresh the display occasionally to redraw the ratsnests. Now connect the resistor to the PLD. Since our traces on the top layer are already oriented horizontally, let’s place this vertical route on the bottom layer. When you begin the route, press ‘2’ to switch to the bottom layer. Since the resistor is a thru-hole part, there is no need for vias in this situation.
+</para>
+
+<para id="RoutingOther5">
+<note type="warning" id="idm6987392">It is a good design practice to keep routes on one layer oriented in the same direction. For example, you might want to have all traces on the top layer oriented horizontally, while all routes on the bottom are oriented vertically. Doing this increases the number of vias that are needed, but makes routing much easier, especially in very dense designs. After routing is complete, you can go back and remove unnecessary vias. Of course, sometimes it will be impossible to adhere to this guideline.</note>
+</para>
+
+<para id="RoutingOther6">
+Route the trace to the top of the PLD. When you get near the top, you can press ‘<term>V</term>’ to place a via. Then you can switch to the top layer to complete the trace.
+</para>
+
+<figure orient="horizontal" id="horfig2">
+<subfigure id="subfig3">
+<media id="idm7602416" alt=""><image src="../../media/FirstRoute2.gif" mime-type="image/gif"/></media>
+</subfigure>
+
+<subfigure id="subfig4">
+<media id="idm6371488" alt=""><image src="../../media/FirstRoute3.gif" mime-type="image/gif"/></media>
+</subfigure>
+</figure>
+
+<para id="RoutingOther7">
+You now have your first complete route. You can begin to finish the other connections. Start by routing one component at a time. For example, you might route the TIL311 next, as is shown above. It is also important to route critical signals first, such as clocks and resets. Remember that you can zoom and pan during operations such as routing. The DRC routing box will move with you. With the current DRC settings, you may sometimes see circles around your traces if you get too close to another net or pad. If this happens, then Layout is warning you that you are making a spacing violation with your route. You will need to fix it. I would also suggest that you browse the shortcut keys in the help to see which shortcuts will be useful during routing. When you are done routing, your design may look something like this.
+</para>
+
+<figure id="fig21">
+<media id="idm7497584" alt=""><image src="../../media/LayoutRoutingDone.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="RoutingOther8">
+Congratulations! All the really hard work is done. Now there are just a few remaining steps to complete your board for submission to a board shop for fabrication.
+</para>
+</section>
+
+<section id="Performing">
+<title>Performing ECOs &amp; Back Annotation</title>
+<para id="Performing1">
+What if you wanted to make some changes to your design while you were in Layout? OrCAD provides the means for this through ECOs (Engineering Change Order) and back annotation. An ECO is used when changes are made in schematics (perhaps you added some more circuitry or changed some connections). Back annotation is used for changes made during Layout.
+</para>
+
+<para id="Performing2">
+When you saved your file, Layout reminded you to back annotate. This was because we added the mounting holes to our design, and OrCAD wants to export those back to schematics. Even though it is not entirely necessary right at this moment, let’s step through the process so you know how it works. On the menu click <term>Auto--&gt;Back Annotate</term>. OrCAD will create a swap file called <term>Elec424Tutorial.swp</term> in your board directory. It is safe to overwrite your existing <term><code>board</code></term> file with the new one. Look at the swap file in Notepad. You will see several sections. One thing that Layout does is update part and net properties (such as its coordinates) in Capture. If new components were added, then you would also see those changes. Now let’s import this file into Capture. Start Capture and highlight your dsn file. Select <term>Tools--&gt;Back Annotate…</term> You can leave the <term>Scope</term> and <term>Mode</term> settings untouched. Use the <term>Browse</term> button to find your swap file. Click <term>OK</term> to start the update. Occasionally, when you add components like mounting holes, you will get an error during back annotation. This is usually safe to ignore.
+</para>
+
+<para id="Performing3">
+Now let’s go the other direction. Perhaps we have one to many decoupling capacitors, so we will remove one. On page 2 of your schematics, delete one of the decoupling capacitors.
+</para>
+
+<figure id="fig22">
+<media id="idp956480" alt=""><image src="../../media/DecouplingCaps1.gif" mime-type="image/gif"/></media>
+</figure>
+
+<figure id="fig23">
+<media id="idp687024" alt=""><image src="../../media/DecouplingCaps2.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Performing4">
+Next, save the design and regenerate the netlist as described previously. Close your board in Layout, but keep Layout running. In Layout select <term>Tools--&gt;ECOs--&gt;Auto ECO</term>. First, you will be asked for your original board file. Find the file <term>Elec424Tutorial.max</term> in your board directory. Second, you will be asked for the new netlist file that you just created. Find the <term>Elec424Tutorial.mnl</term> file in your <term><code>sch</code></term> directory. Finally, you will be asked for a <term><code>lis</code></term> file to write to. This file is just a report of the ECO, and it is safe to overwrite the existing one in your board directory. When the ECO is done, you will see the <term><code>lis</code></term> file in Notepad with a report of what happened during the ECO.  
+
+<figure id="fig24">
+<media id="idm7810864" alt=""><image src="../../media/ECOReport.gif" mime-type="image/gif"/></media>
+</figure>
+
+You will also be prompted to save the new board file. If the report looks OK, then go ahead and overwrite your existing board file. In our example here, we deleted <term>C11</term>, so the report should look something like the diagram on the left. If you open the new board file, you will see that capacitor <term>C11</term> is no longer in the design.
+</para>
+
+<figure orient="horizontal" id="horfig3">
+<subfigure id="subfig5">
+<media id="idp2310848" alt=""><image src="../../media/ECO-Before.gif" mime-type="image/gif"/></media>
+<caption>Before ECO</caption>
+</subfigure>
+
+<subfigure id="subfig6">
+<media id="idp1966096" alt=""><image src="../../media/ECO-After.gif" mime-type="image/gif"/></media>
+<caption>After ECO</caption>
+</subfigure>
+</figure>
+
+<para id="Performing5">
+When you open your board after an ECO, you may get the following message.
+</para>
+
+<figure id="fig25">
+<media id="idm6232160" alt=""><image src="../../media/DrillChartDuplicate.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Performing6">
+Just click <term>OK</term>. We will fix this problem a little bit later.
+</para>
+
+<para id="Performing7">
+Deleting this part was just a demonstration. We really want that capacitor in our design, so let’s put it back. Adding new components to a design requires a little more caution than deleting components. Open up page 2 of your schematics and cut and paste one of the other decoupling capacitors.
+</para>
+
+<figure id="fig26">
+<media id="idm6580080" alt=""><image src="../../media/ECO-AddingNewComp.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Performing8">
+When you cut and paste a component, every property gets copied, including the reference designator. This design now has two capacitors called <term>C10</term>. If you were to try and perform an ECO right now, it would cause much confusion. Double-click the new capacitor and change the reference to <term>C?</term>. 
+</para>
+
+<para id="Performing9">
+<note type="warning" id="idm20144">After Layout has begun, any new parts in schematics should be given a ‘?’ in the reference designator. Then let Capture’s annotation utilities give a new number to the part.</note>
+</para>
+
+<para id="Performing10">
+Since we have some new parts, we need to annotate the design again. Perform an incremental reference update as you did before. The new part should now have a number. Regenerate the netlist and start an ECO. When done, the part should be back in the design. However, when we cut and paste parts, all properties are copied, and this includes x and y locations on the board. Our new part is probably sitting right on top of another part. Use the components spreadsheet to locate the new part. Give it a new and safe location such as 0,0 and then use the <term>Component Tool</term> to place it in the proper location. You could also avoid this problem by resetting the coordinate properties in Capture before regenerating the netlist.
+</para>
+
+<para id="Performing11">
+You will often use ECO to do forward-annotation, but there are only a few occasions where you may want to perform back annotation. One such instance is to rename components. Right now, all the components in your design are named according to their order in schematics. However, in a larger board, it will be very hard to tell where a specific component is during debug. The components on the board will seem to be named in a random manner. Layout can rename your components for you, which will make finding them on the board much easier. To see the results of this operation, make the silkscreen layer visible again (<term>SST</term>). Select <term>Options--&gt;Components Renaming…</term> and choose <term>Right, Down…</term> in the <term>Rename Direction</term> dialog.
+</para>
+
+<figure id="fig27">
+<media id="idm892496" alt=""><image src="../../media/ComponentsRenaming.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Performing12">
+Next, choose <term>Auto--&gt;Rename Components</term>. You silkscreen should look a lot different now.
+</para>
+
+<figure orient="horizontal" id="horfig4">
+<subfigure id="subfig7">
+<media id="idp1722400" alt=""><image src="../../media/SilkscreenBeforeRename.gif" mime-type="image/gif"/></media>
+<caption>Before Renaming</caption>
+</subfigure>
+
+<subfigure id="subfig8">
+<media id="idp805440" alt=""><image src="../../media/SilkscreenAfterRename.gif" mime-type="image/gif"/></media>
+<caption>After Renaming</caption>
+</subfigure>
+</figure>
+
+<para id="Performing13">
+Since you have changed the reference designators in your design, you need to generate a swap file and perform back annotation. You should do this <term>IMMEDIATELY</term>. If you don’t, it can cause some serious problems for you later in the design. When you read the swap file into Capture, you may get errors on renaming the mounting holes. It is safe to ignore these.
+</para>
+</section>
+
+<section id="Checking">
+<title>Checking for Errors</title>
+<para id="Checking1">
+The next step in the design process is to check for any spacing errors. OrCAD uses the spacing variable that you set earlier to determine if there are errors in your design. We used 10 mil spacing from all features as a minimum for this design. To perform a Design Rule Check (DRC) choose <term>Auto--&gt;Design Rule Check…</term> from the menu.
+</para>
+
+<figure id="fig28">
+<media id="idp1301312" alt=""><image src="../../media/CheckDesignRules.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Checking2">
+Make sure all the <term>Check Rule Settings</term> are checked and click <term>OK</term>. Your design will rarely contain no errors, and you will need to look at the errors spreadsheet to see what the errors are. Some can be safely ignored.
+</para>
+
+<figure id="fig29">
+<media id="idp2949488" alt=""><image src="../../media/ErrorSpreadsheet1.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Checking3">
+In this example there are four Pad Spacing Errors, one generated by each of the mounting holes. In this case OrCAD is complaining because the place outline for the part is on the edge of the board. This error is OK to ignore. If there are errors that need to be fixed, you can delete the marker from the spreadsheet. Let’s generate a route spacing error so you can see what it looks like. These are the most important. Move a trace anywhere in your design so that it conflicts with another trace or pad.
+</para>
+
+<figure id="fig30">
+<media id="idp2345856" alt=""><image src="../../media/RouteSpacingError.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Checking4">
+Now rerun the DRC. The new errors should appear in the spreadsheet.
+</para>
+
+<figure id="fig31">
+<media id="idp2920656" alt=""><image src="../../media/ErrorSpreadsheet2.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Checking5">
+You can remove the errors by moving the trace back to its original position. Once the error has been corrected, you can delete the marker from the errors spreadsheet. Do not try to use the <term>Auto--&gt;Remove Violations</term> tool. It is tempting, but it will actually rip up offending traces and move parts. You will end up having to do a lot of cleanup and rerouting after using this tool.
+</para>
+</section>
+
+<section id="Cleaning">
+<title>Cleaning Up &amp; the Design</title>
+<para id="Cleaning1">
+Now it is time to clean up your design. You should think of your board as a work of art. Other people may look at it, so you want it to look nice. Furthermore, a clean design will ensure fabrication success. When cleaning the design, the following should be kept in mind.
+</para>
+
+<para id="Cleaning2">
+<term>A. Route Spacing</term> – You have set a minimum of 10 mils for feature spacing in your design. However, do not pack traces closely together unless you have to. First, you can push the manufacturing limits to far and some of your boards may come back bad. Second, routing traces closely together is generally a bad idea because this can result in undesired mutual inductance between traces.
+</para>
+
+<para id="Cleaning3">
+<term>B. Right Angles in Traces</term> – Don’t use right angles in routing your traces. Miter the corners.
+</para>
+
+<figure orient="horizontal" id="horfig5">
+<subfigure id="subfig9">
+<media id="idm914016" alt=""><image src="../../media/RightAngle1.gif" mime-type="image/gif"/></media>
+<caption>BAD</caption>
+</subfigure>
+
+<subfigure id="subfig10">
+<media id="idp3077488" alt=""><image src="../../media/RightAngle2.gif" mime-type="image/gif"/></media>
+<caption>GOOD</caption>
+</subfigure>
+</figure>
+
+<para id="Cleaning4">
+<term>C. Pad Exits</term> – Trace exits from pads should be clean and not come out of the pad at unusual angles.
+</para>
+
+<figure orient="horizontal" id="horfig6">
+<subfigure id="subfig11">
+<media id="idm123760" alt=""><image src="../../media/PadExitsBad.gif" mime-type="image/gif"/></media>
+<caption>BAD</caption>
+</subfigure>
+
+<subfigure id="subfig12">
+<media id="idm5955184" alt=""><image src="../../media/PadExitsGood.gif" mime-type="image/gif"/></media>
+<caption>GOOD</caption>
+</subfigure>
+</figure>
+
+<para id="Cleaning5">
+<term>D. Remove Extra Vias</term> – Vias add cost to a board, so it is a good practice to remove any unnecessary vias from your design.
+</para>
+
+<para id="Cleaning6">
+<term>E. Drills</term> – Drills require some special attention. First, you need to fix the error you got earlier about the drills. This error occurs sometimes after you perform an ECO. To see the problem, make the <term>Drill Drawing (DRD)</term> layer visible.  Press <term>Backspace</term> to clear the display and then <term>Shift-5</term> to display just the <term>DRD</term> layer.
+</para>
+
+<figure id="fig32">
+<media id="idm6043968" alt=""><image src="../../media/DrillDrawingLayer.gif" mime-type="image/gif"/></media>
+</figure>
+
+
+<para id="Cleaning7">
+The <term>DRD</term> layer is a documentation layer that contains a chart with all your drill sizes and their locations on the board. The problem is that two drills are using the same symbol. In this case it is the 14 mil drill and the 150 mil drill. To fix the problem, click <term>View Spreadsheet</term> and select <term>Drills</term> to view the drills spreadsheet.
+</para>
+
+<figure orient="horizontal" id="horfig7">
+<subfigure id="subfig13">
+<media id="idp3052848" alt=""><image src="../../media/DrillsSpreadsheet.gif" mime-type="image/gif"/></media>
+</subfigure>
+
+<subfigure id="subfig14">
+<media id="idp478400" alt=""><image src="../../media/DrillProperties.gif" mime-type="image/gif"/></media>
+</subfigure>
+</figure>
+
+<para id="Cleaning8">
+You can double-click the <term>Drill Size</term> cell to adjust the <term>Drill Properties</term>. I suggest starting with symbol <term>1</term> for the 13 mil drill and incrementing from there. When you are done, you should have symbols <term>1</term> to <term>8</term>, and you will no longer get the error when you open your design.
+</para>
+
+<para id="Cleaning9">
+There is one other thing that needs to be done with regard to drills. Some board shops have limitations on the sizes of drills. The board shop we are using for this project offers only 16 drill sizes . They have programs that will scan your Gerber files and automatically adjust the drill sizes for you, but to avoid any problems it is wise to give them files with the correct sizes in the first place. This way you can be sure that your board will be manufactured exactly as you send it. It is also a good practice to consolidate drills anyway. In this design, we might try to adjust the footprints so that the 34 and 35 mil drill sizes are the same. The board shop will only have to use one drill bit, and this will save money.
+</para>
+
+<para id="Cleaning10">
+To change the drills, we must edit the padstack in the original footprint. The <term>Drill Drawing</term> layer can help you find which footprints need to be changed. For example, we can see that the PLD and TIL311 use 34 mil drills. This is not a valid size, but a 35 mil drill is acceptable. Open the <term>Library Manager</term> and use the padstacks spreadsheet to adjust the drill sizes (<term>DRILL</term> and <term>DRLDWG</term> layers) for these two parts. The footprints you are adjusting should be <term>DIP-14</term> and <term>PLCC-44</term>. You may have to adjust several padstacks in each footprint. In addition, make sure that the clearances we defined earlier for each layer are still good (they should be). Finally, when making changes to footprints like this it is always good to check the datasheet to make sure that the part will still fit. You are only making very small changes of 1 or 2 mils, but it is important to check.
+</para>
+
+<para id="Cleaning11">
+Once you have made a change to a footprint, and now you need to update the footprint in Layout. Open the components spreadsheet and find the PLD. Double-click to bring up the <term>Edit Component</term> dialog box. Click the <term>Footprint</term> button to show the <term>Select Footprint</term> dialog.
+</para>
+
+<figure id="fig33">
+<media id="idp1974464" alt=""><image src="../../media/SelectFootprint.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Cleaning12">
+Choose the new footprint from your library (not the local cache) and click <term>OK</term>. Click <term>OK</term> again when asked for the <term>Replacement Range</term>. Do the same procedure for the TIL-311. When done refresh the display. Your drill chart should no longer show any 34 mil drills.
+</para>
+
+<figure id="fig34">
+<media id="idm6634096" alt=""><image src="../../media/DrillDrawingLayer2.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Cleaning13">
+Do the same thing for the parts with 37 mil drills and the 39 mil drills. Adjust the 37 down to 35, and adjust the 39 up to 40. When you are done, you should have only 6 unique drill sizes.
+</para>
+
+<figure id="fig35">
+<media id="idm7500992" alt=""><image src="../../media/DrillDrawingLayer3.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Cleaning14">
+<term>F. An Orderly Silkscreen</term> – Use the <term>Text Tool</term> to adjust the silkscreen. All text should be oriented in the same direction for readability. Silkscreen cannot overlap pads or vias (overlapping traces is OK). Change the <term>Detail Grid</term> to a finer setting if necessary. Reference designators should be placed as close to the part as possible. Polarity signs should be placed in the correct position.
+</para>
+
+<figure orient="horizontal" id="horfig8">
+<subfigure id="subfig15">
+<media id="idm7020864" alt=""><image src="../../media/SilkscreenDirty.gif" mime-type="image/gif"/></media>
+<caption>BAD</caption>
+</subfigure>
+
+<subfigure id="subfig16">
+<media id="idm78864" alt=""><image src="../../media/SilkscreenClean.gif" mime-type="image/gif"/></media>
+<caption>GOOD</caption>
+</subfigure>
+</figure>
+</section>
+
+<section id="Documenting">
+<title>Documenting the Design</title>
+<para id="Doc1">
+Good documentation of your design will help both in manufacturing and debug. First, we can add some useful text to the board. For example, the MAX603 part has a maximum input voltage of 11.5V, so maybe we want to put some text on the board to indicate that. You can use the <term>Text Tool</term> to create new text. Right-click anywhere in the design and select <term>New…</term> to get the <term>Text Edit</term> dialog.
+</para>
+
+<figure orient="horizontal" id="horfig9">
+<subfigure id="subfig17">
+<media id="idm443472" alt=""><image src="../../media/TextEdit.gif" mime-type="image/gif"/></media>
+</subfigure>
+
+<subfigure id="subfig18">
+<media id="idm139024" alt=""><image src="../../media/Silkscreen1.gif" mime-type="image/gif"/></media>
+</subfigure>
+</figure>
+
+<para id="Doc2">
+Most text you create will be <term>Free</term>. For good readability, I suggest a <term>Line Width</term> of 8 and a <term>Text Height</term> of 75.  A 6 mil <term>Line Width</term> is about as small as you can go to keep the text readable.
+</para>
+
+<para id="Doc3">
+There are a few other things we can place on the silkscreen to document our board. One very useful thing is to label the pins on the programming header for the PLD. This will make it easier to hook up the programmer.
+</para>
+
+<figure id="fig36">
+<media id="idm373280" alt=""><image src="../../media/Silkscreen2.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Doc4">
+It is also useful to label the IO header pins with the pin numbers of the PLD that connect to it. You can also remove the pin numbers of the connector itself to avoid confusion.
+</para>
+
+<figure id="fig37">
+<media id="idp910160" alt=""><image src="../../media/Silkscreen3.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Doc5">
+It is also customary to add a logo and some information about the board, as well as the initials of the person who designed it. First, let’s add a logo for Rice University. Using the <term>Component Tool</term>, right-click and select <term>New…</term> Give this new component a reference designator of <term>OWL1</term>. The <term>Footprint</term> should be <term>RICELOGO</term> from your library. The logo will actually be in the metal layer, so place it somewhere where it will not interfere with any traces or pads. When placed, open the <term>Edit Component</term> dialog from the components spreadsheet and check the <term>Fixed</term>, <term>Non-Electric</term> and <term>Locked</term> boxes, uncheck the <term>Route Enabled</term> box. When you next save your design you will be asked to back annotate since you just added a new component.
+</para>
+
+<figure id="fig38">
+<media id="idm529744" alt=""><image src="../../media/RiceLogo.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Doc6">
+Next, we will add the some information about the board. You will use the <term>Text Tool</term>, but place this information on the <term>TOP</term> layer instead of silkscreen (<term>SSTOP</term>).
+</para>
+
+<figure id="fig39">
+<media id="idm267552" alt=""><image src="../../media/BoardInformation.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Doc7">
+We also need to add a few things to the <term>Drill Drawing</term> layer. It is customary to provide board dimensions and engineering contact information on this layer. Make the <term>Drill Drawing</term> layer visible if it is not already. First move the drill chart to the right of the board by selecting ToolàDrill ChartàMove Drill Chart from the menu. Next, add dimension lines using ToolàDimensionàNew. Your board should measure exactly 3000 mils by 2000 mils. Now use the Text Tool to add some text with your name, phone number and email beneath the drill chart. When you are done everything should look like this. 
+</para>
+
+<figure id="fig40">
+<media id="idm497024" alt=""><image src="../../media/DrillDrawingLayer4.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Doc8">
+For the final documentation steps, you will need to turn on some of the other layers. Make sure that all of the following layers are visible: <term>TOP</term>, <term>BOT</term>, <term>GND</term>, <term>PWR</term>, <term>SMT</term>, <term>SMB</term>, <term>SST</term>, <term>DRD</term>. You are going to add some text to each layer (outside the boundary of the board) to indicate what layer this is. This is necessary because you will make a separate Gerber file for each layer and you will need to be able to tell which layer you are viewing. Using the <term>Text Tool</term> put the following text on each layer above the board and aligned with the left edge:
+</para>
+
+<figure id="fig41">
+<media id="idm902752" alt=""><image src="../../media/ScreenHunter_016.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="Doc9">
+Finally, we need to add some cut lines to mark the board outline on the <term>TOP</term> and silkscreen (<term>SST</term>) layers. The board shop will use these cut lines to route out the board from a larger panel. Click <term>View Spreadsheet</term> and then <term>Obstacles</term> to open the obstacles spreadsheet. Find your board outline. It will be the only one with the obstacle type of <term>Board outline</term>. Press <term>CTRL-C</term> twice to create two copies of the board outline. Double-click one to open the <term>Edit Obstacle</term> dialog. Change the <term>Obstacle Type</term> to <term>Detail</term>, <term>Width</term> to 10 and the <term>Obstacle Layer</term> to <term>TOP</term>. Do the same with the other one, but place it on the <term>SSTOP</term> layer. 
+</para>
+
+<figure id="fig42">
+<media id="idm229712" alt=""><image src="../../media/CutLines.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Doc10">
+Your design is now complete and you are ready to generate Gerber files for fabrication. Before proceeding, you will want to run the DRC again to check for errors. Once all errors are resolved, you can proceed to the next step. The Rice logo will generate some errors that can be ignored.
+</para>
+</section>
+
+<section id="Gerber">
+<title>Creating Gerber Files</title>
+<para id="Gerber1">
+So, you’ve finished your design and you are ready to send off the Gerber files for fabrication. Creating the Gerber files is quite easy. First, select <term>Options--&gt;Post Process Settings…</term> You already set these when you made your board template, but just check to make sure that the following <term>Plot output File Names</term> are <term>Batch Enabled</term>: <term>*.TOP</term>, <term>*.BOT</term>, <term>*.GND</term>, <term>*.PWR</term>, <term>*.SMT</term>, <term>*.SMB</term>, <term>*.SST</term>, and <term>*.DRD</term>. Also verify that each output file’s <term>Device</term> is <term>EXTENDED GERBER</term>. If everything looks OK, then select <term>Auto--&gt;Run Post Processor</term> from the menu. You will get a series of dialog boxes, just click OK, and then you will see a <term><code>lis</code></term> file in Notepad with a report of the processing. At the very bottom of the file, it should say <term>No warnings or errors</term>. That’s it. Your Gerber files have been made. If you look in your <term><code>board</code></term> directory, you will see the files with the extensions listed above, plus a few others.
+</para>
+</section>
+
+<section id="Viewing">
+<title>Viewing the Gerber Files</title>
+<para id="Viewing1">
+Before submitting your Gerber files for fabrication, it is best to look at them in a Gerber viewer. You will often catch mistakes there that you don’t see in layout. OrCAD has a built in Gerber viewer and editor called GerbTool. This is actually a very powerful program that you can use to edit the Gerber files, but you will just use it to look at them for now. In the main Layout window select <term>Tools--&gt;GerbTool--&gt;Open…</term> In your board directory there should be a file called <term>Elec424Tutorial.gtd</term>. Find this file and open it. You should see your design in GerbTool.
+</para>
+
+<figure id="fig43">
+<media id="idm716640" alt=""><image src="../../media/GerbTool.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Viewing2">
+As noted before, GerbTool can do many different things with your design. However, the only thing that concerns you here is inspecting your Gerber files. The buttons on the right side of the screen control which layers are visible. Use them to inspect each layer individually. Once you are satisfied that each layer looks in order, close GerbTool. You do not need to save any changes when prompted.
+</para>
+</section>
+
+
+
+
+
+</content>
+  
+</document>

@@ -1,0 +1,62 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:m="http://www.w3.org/1998/Math/MathML" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Audio Processing Board for the TMS320F2812 DSP</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>99888d8a-d60f-40ed-b325-58af7922b505</md:uuid>
+</metadata>
+
+  <content>
+  	<section id="intro">
+  	<title>Overview</title>
+    <para id="par_intro_1">
+       This module describes an audio signal processing daughtercard that has been designed for use with a <link url="http://www.ti.com">Texas Instruments</link> TMS320F2812 DSP. The daughtercard is meant to be used with the corresponding eZdsp kit from <link url="http://www.spectrumdigital.com">Spectrum Digital</link>. This card was designed to teach students about various functions of the TMS320C2000 series of DSPs in a practical setting, and to allow them to perform basic audio experiments. The figure below shows a simplified block diagram of the audio daughtercard, the features of which will be discussed in the next section.
+	</para>
+	<figure id="fig_block_diagram">
+	<title>System Block Diagram</title>
+	<media id="idp3214960" alt=""><image src="../../media/audio_card.jpg" mime-type="image/jpeg" width="647"/></media>
+	<caption>A simplified system block diagram for the audio daughtercard.</caption>
+	</figure>
+	</section>
+	<section id="tech">
+	<title>Technical Description</title>
+	<section id="features">
+	<title>System Features</title>
+	<para id="par_tech_1">
+	The audio daghtercard has the following features and functionality:
+	<list id="list_features" list-type="bulleted">
+	    <title>Audio Daughtercard Features List</title>
+	    <item>Stereo analog input with maximum input voltage of 500mVpp.</item> 
+	    <item>Amplification to 0 to 3V range of TMS320F2812 12-bit ADC.</item> 
+	    <item>Programmable pre-ADC anti-alias filtering using the <link resource="MAX7414.pdf">MAX7414</link>, a 5th order lowpass Butterworth filter with a tunable 
+	  <m:math>
+	    <m:ci>
+	      <m:msub>
+	        <m:mi>f</m:mi>
+	        <m:mn>c</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:math>
+from 1 to 15kHz.
+      </item>
+      <item>2 12-bit DAC Channels using the <link resource="tlv5638.pdf">TLV5638</link>.</item>
+		<item>Programmable post-DAC filtering using the <link resource="MAX7414.pdf">MAX7414</link>.</item>
+		<item>Output power amplification capabale of driving 0.7W into an 8 Ohm load, using the <link resource="tpa721.pdf">TPA721</link>.</item>
+		<item>2 Potentiometers connected to ADC inputs.</item>
+		<item>Pushbutton input capable of interrupting the DSP.</item>
+		<item>Pushbuttons to shutdown power amplification</item>
+		<item>8 element LED array</item>
+		<item>DSP control over the following: pre-ADC and post-DAC filter shutdown, pre-ADC and post-DAC filter 
+	  <m:math>
+	    <m:ci>
+	      <m:msub>
+	        <m:mi>f</m:mi>
+	        <m:mn>c</m:mn>
+	      </m:msub>
+	    </m:ci>
+	  </m:math>, 
+and power amplifier shutdown.</item> 
+	  </list>
+	</para>
+	</section>
+	</section>
+  </content>
+  
+</document>

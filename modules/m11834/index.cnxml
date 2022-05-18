@@ -1,0 +1,30 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Printed Circuit Boards (PCBs)</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>70178546-d141-4618-a4de-3be714109be0</md:uuid>
+</metadata>
+
+  <content>
+<para id="par1">
+PCBs consist of a number of electrical and non-electrical layers. 2 to 4 electrical layers are fairly common for simple circuit boards. 8 to 20 layers can often be seen in many industry applications. The diagram below shows the electrical layer stackup for a 4-layer board like the one you are making now. The top and bottom layers are used for routing nets between parts, while the inner two layers are solid copper planes for connections to power and ground. A fiberglass or epoxy resin dielectric material separates each of the layers.
+</para>
+
+<figure id="fig1">
+<media id="idm1867168" alt=""><image src="../../media/board_stackup.JPG" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="par2">
+There are also several non-electrical layers:
+<list id="layers" list-type="bulleted">
+<item><term>Drill Layer</term> – This layer defines finished drill sizes and drill locations for parts that have pins that go through the board. It is also used for general documentation.</item>
+<item><term>Solder Mask</term> – There is a coating on the top and bottom of the PCB that prevents solder from flowing freely on the board. This is what gives most circuit boards their green color.</item>
+<item><term>Solder Paste</term> – For parts that are ‘surface mount’ (the pins rest on the surface of the board and do not go through it) this layer defines the spaces where solder (in a paste form) will be applied for circuit assembly. This layer is not used for manufacturing and is only used by the person assembling the board.</item>
+<item><term>Silkscreen</term> – This layer is used for documentation of a PCB. Reference designators and other useful text can be printed on the top or bottom of a PCB using a process similar to that used for silkscreen t-shirts.</item>
+</list>
+</para>
+
+<para id="par3">
+Footprints are composed of one or more padstacks. These padstacks define how a pin on a part looks on each of the electrical and non-electrical layers.  Each of your footprints will need at least one padstack defined. 
+</para>
+</content>
+  
+</document>

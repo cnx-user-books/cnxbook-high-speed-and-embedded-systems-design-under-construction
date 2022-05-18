@@ -1,0 +1,35 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Using Code Composer Studio with TMS320F2812</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>33d3792f-400c-47a0-95fe-47a6c2c80fb8</md:uuid>
+</metadata>
+
+<content>
+<section id="SettingDSK">
+<title>Setting Up the DSK</title>
+<para id="setdsk1">
+To get started, you must first power up the eZdsp™ F2812 with the provided power supply and connect the parallel cable from the board to the PC with Code Composer Studio installed on it.
+</para>
+
+<para id="setdsk2">
+Two LEDs will light up if the board is receiving power, if not, you may have to double-check the power supply.
+</para>
+
+<figure id="fig1">
+<media id="idp728592" alt=""><image src="../../media/eZdspBoard.jpg" mime-type="image/jpeg"/></media>
+<caption>eZdsp™ F2812 board with power connected</caption>
+</figure>
+
+<note type="warning" id="idp717712">
+You must have the eZdsp™ F2812 connected to the PC.  If not, you will see the following error:
+</note>
+
+<figure id="fig4">
+<media id="idm6734112" alt=""><image src="../../media/ErrorConnection.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="startccc3">
+When this happens, click <term>Abort</term>, and connect the eZdsk™.  Restart Code Composer Studio.
+</para>
+</section>
+</content>
+</document>

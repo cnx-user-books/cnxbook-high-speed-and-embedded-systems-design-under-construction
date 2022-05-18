@@ -1,0 +1,37 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Creating a Schematic Parts Library in OrCAD</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>0bf1dd4f-4657-4e34-ab19-4adcc34bd817</md:uuid>
+</metadata>
+
+  <content>
+<note type="warning" id="idm1513664">The Connexions version of the OrCAD tutorial is still in development. Please <link url="http://koala.ece.rice.edu/index.cfm?page=pub"> click here</link> for the original and complete tutorial. You may also browse this complete tutorial within Connexions by using the Mozilla browser and accessing the main Connexions page at <link url="http://cnx.rice.edu">http://cnx.rice.edu</link>.  Click on the 'Contents' tab and select Rice University ELEC 424/427 under the 'Courses' tab.</note>
+<para id="CreatingPartLib1">
+OrCAD allows you to create a library of part symbols for use in schematic entry. These libraries are kept in separate files that 
+are included in the project workspace. This allows you to reuse libraries in other designs. We will now create symbols for all 
+the parts in our design.
+</para>
+
+<para id="CreatingPartLib2"><note id="idm270336">When you place a part in a design, OrCAD creates a cached copy of the part symbol in the design file. This makes 
+schematic projects portable but can also introduce some problems later in the design cycle. Please resist the temptation to edit 
+parts directly in schematics, as this will make the design out of sync with respect to your library. Always edit symbols in the 
+library and then use the Replace Cache and Update Cache commands to change the part in schematics. See the OrCAD help for 
+more information on these commands.</note>
+</para>
+
+<para id="CreatingPartLib3">
+First we must add a new library to our design. To do this, click <term>File--&gt;New--&gt;Library</term>. Your project window 
+will now look like the following figure.
+</para>
+
+<figure id="fig1">
+<media id="idm8100816" alt=""><image src="../../media/AddingALibrary.gif" mime-type="image/gif"/></media>
+<caption>Adding a parts library</caption>
+</figure>
+
+<para id="CreatingPartLib4">
+Right-click the library file and select <term>Save As... </term>Name the file <term>Elec424Tutorial</term> and place 
+it in the <code>lib</code> directory that you created earlier. You are now ready to add parts to your library.
+</para>
+  </content>
+  
+</document>

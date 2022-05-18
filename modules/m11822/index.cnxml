@@ -1,0 +1,369 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Lab: Implementing a FIR Filter on the F2812 DSP</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>9389e721-4f78-4138-84e7-64dd22dc82fd</md:uuid>
+</metadata>
+
+  <content>
+<section id="Objective">
+<title>Objective</title>
+<para id="Obj1">
+In this lab, you will learn how to set up Spectrum Digital’s eZdsp™ F2812 to implement a finite impulse response (FIR) filter using an audio input.  Since the F2812 does not have a digital-to-analog converter (DAC) as one of its peripherals, you will be using an audio processing daughtercard that features Texas Instruments’ (TI) TLV5638 DAC.
+</para>
+</section>
+
+<section id="fil">
+<title>FIR Filtering Theory</title>
+<para id="Sidenote">
+Before you begin, review the <link document="m11682">basics of digital filtering</link>.
+</para>
+</section>
+
+<section id="Introduction">
+<title>Introduction to the eZdsp™ F2812</title>
+<para id="Intro1">
+The eZdsp™ F2812 allows people to determine if the TI TMS320F2812 digital signal processor (DSP) is suitable for their application requirements.  It also allows evaluators to develop and run software for the F2812 processor by using Code Composer Studio.  A separate tutorial for the Code Composer Studio software is available in this course.
+</para>
+
+<para id="Intro2">
+The eZdsp™ F2812 has the following features:
+<list id="Features" list-type="bulleted">
+<item>TMS320F2812 DSP</item>
+<item>150 MIPS operating speed</item>
+<item>18K words on-chip RAM</item>
+<item>128K words on-chip Flash memory</item>
+<item>64K words off-chip SRAM memory</item>
+<item>30 MHz clock</item>
+<item>2 Expansion Connectors (analog, I/O)</item>
+<item>Onboard IEEE 1149.1 JTAG Controller</item>
+<item>5V only operation with supplied AC adapter</item>
+<item>Onboard IEEE 1149.1 JTAG emulation connector</item>
+</list>
+</para>
+
+<figure id="fig1">
+<title>eZdsp™ F2812 Block Diagram from Spectrum Digital's Datasheet</title>
+<media id="idp671120" alt=""><image src="../../media/eZdspF2812BlockDiagram.jpg" mime-type="image/jpeg"/></media>
+</figure>
+</section>
+
+<section id="Hardware">
+<title>Setting Up Hardware</title>
+<para id="hardware1">
+To begin this lab, there are a couple of tasks you need to do in order to set up your hardware before programming the DSP. The eZdsp™ requires a 5V power supply that is provided and should be connected to the board via connector <term>P6</term>.  The supplied parallel cable also needs to be plugged into a lab PC.
+</para>
+
+<para id="hardware2">
+Attach the audio processing daughtercard to the eZdsp™ board as shown in the following pictures:
+</para>
+
+<figure orient="horizontal" id="horfig3">
+<subfigure id="subfig5">
+<media id="idp1075136" alt=""><image src="../../media/Audio_eZdspHeaders.jpg" mime-type="image/jpeg"/></media>
+<caption>Side View of the Mounted Boards</caption>
+</subfigure>
+<subfigure id="subfig6">
+<media id="idp987664" alt=""><image src="../../media/AudioMountedoneZdsp.jpg" mime-type="image/jpeg"/></media>
+<caption>Audio Daughtercard Mounted on the eZdsp</caption>
+</subfigure>
+</figure>
+
+
+<para id="hardware3">
+Connect the power supply and parallel cable to the eZdsp™.  The LED labeled <term>Power</term> on the daughtercard should light up bright orange.
+</para>
+
+<para id="hardware4">
+Connect the provided speakers to the jumpers labeled <term>R_SPKR</term> and <term>L_SPKR</term> on the daughtercard.  Make sure the black wire of each speaker is connected to the ‘<term>-</term>‘ and the red wire is connected to the ‘<term>+</term>’.   
+</para>
+
+<para id="hardware5">
+For the lab, you will be using an Apple iPod to supply the audio source.  Connect the supplied cable to the jumper labeled <term>J4</term> on the daughtercard.  Since the iPod you are using does not have a reliable battery, make sure the iPod is connected to a power supply.
+</para>
+
+<para id="hardware6">
+Your setup should look like this:
+</para>
+
+<figure id="fig9">
+<media id="idp1032336" alt=""><image src="../../media/TotalAudioSetup.jpg" mime-type="image/jpeg"/></media>
+<caption>Total Hardware Setup</caption>
+</figure>
+
+
+<para id="hardware7">
+To turn the iPod on, press the <term>Play</term> button.  To turn it off, hold the <term>Play</term> button until the screen goes blank, just like in the above picture.
+</para>
+</section>
+
+<section id="software">
+<title>Software Implementation</title>
+<para id="settingdsp">
+Please read <link document="m11823">how to set up the F2812 to run Code Composer Studio.</link> 
+
+</para>
+<exercise id="problem1">
+<problem id="idp1090576">
+<para id="pro1">
+Use Matlab to determine the FIR filter coeffients by using ‘<code>remez</code>’, ‘<code>fir1</code>’ and ‘<code>fir2</code>’ for each of the following filters: <list id="filters" list-type="enumerated">
+<item>An order-30 low-pass filter having a cut-off frequency 15kHz by the windowing method using the fir1 command.</item>
+<item>An order-30 high-pass filter having transition band 15kHz-16kHz using the remez command.</item>
+<item>Compare the above by showing the frequency response using the freqz command.  How are the filters different?</item>
+<item>An order-30 high-pass filter having transition band 14-15kHz by frequency sampling method using the fir2 command.</item>
+<item>An order-30 high-pass filter having a transition band 14-15kHz using the remez command.</item>
+<item>Compare the above two filters by showing the frequency response using the freqz command.  How are the filters different?</item>
+<item>An order-60 band-pass filter having pass band 3kHz-6kHz using the remez command.  Specify the transition bands as 2kHz-3kHz and 6kHz-7kHz.</item>
+</list>
+</para>
+</problem>
+</exercise>
+
+<para id="software2">
+After you have the filter coefficients, take the two’s complement by using <link url="http://www.ece.rice.edu/~choi/elec434/twomcomplement.m">twocomplement.m</link>.  You need them in that format in order to use them in the A/D-D/A conversion.  Make sure you divide the coefficients by two before taking the two’s complement.  To include them in your file, use the <link url="http://www.ece.rice.edu/~choi/elec434/save_coeff.m">save_coeff.m</link> function to create an assembly file.
+</para>
+
+<exercise id="problem2">
+<problem id="idp332992">
+<para id="prob2">
+Download the following files to give you a good starting point:  
+[Insert code files here]
+Read through the files and give a brief description of each one.
+</para>
+</problem>
+</exercise>
+</section>
+
+<section id="SPI">
+<title>Serial Peripheral Interface (SPI)</title>
+<para id="spi1">
+The serial peripheral interface (SPI) is a high-speed synchronous serial input/output (I/O) port that allows a serial bit stream of programmed length (1-16 bits) to be shifted into and out of the device at a programmed bit-transfer rate.  The SPI is normally used for communications between the DSP controller and external peripherals, the DAC in our case, or another controller.
+</para>
+
+<exercise id="problem3">
+<problem id="idm6496864">
+<para id="prob3">
+To implement the FIR filter, the DSP must be set up to communicate with the DAC on the daughtercard.  Set up the SPI registers on the F2812 DSP by assigning the following values to the corresponding registers:
+</para>
+<table frame="all" id="spitable1" summary="">
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead valign="top">
+<row>
+<entry align="center">Register Name</entry>
+<entry align="center">Register Value (HEX)</entry>
+</row>
+</thead>
+<tbody valign="top">
+<row>
+<entry>SPICCR.bit.SPISWRESET</entry>
+<entry>0</entry>
+</row>
+<row>
+<entry>SPICCR.all</entry>
+<entry>0x005F</entry>
+</row>
+<row>
+<entry>SPICTL.all</entry>
+<entry>0x001F</entry>
+</row>
+<row>
+<entry>SPISTS.all</entry>
+<entry>0x0000</entry>
+</row>
+<row>
+<entry>SPIBRR.all</entry>
+<entry>0x0002</entry>
+</row>
+<row>
+<entry>SPIFFTX.all</entry>
+<entry>0xC028</entry>
+</row>
+<row>
+<entry>SPIFFRX.all</entry>
+<entry>0x0028</entry>
+</row>
+<row>
+<entry>SPIFFCT.all</entry>
+<entry>0x00</entry>
+</row>
+<row>
+<entry>SPIPRI.all</entry>
+<entry>0x0010</entry>
+</row>
+<row>
+<entry>SPICCR.bit.SPISWRESET</entry>
+<entry>1</entry>
+</row>
+<row>
+<entry>SPIFFTX.bit.TXFIFO</entry>
+<entry>1</entry>
+</row>
+<row>
+<entry>SPIFFRX.bit.RXFIFORESET</entry>
+<entry>1</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+<para id="prob3b">
+Which register is set to:
+<list id="spi2" list-type="enumerated">
+<item>Enable the FIFOs?</item>
+<item>Have the SPI interrupt-driven?</item>
+<item>The SPI bit transfer rate?</item>
+</list>
+</para>
+</problem>
+</exercise>
+</section>
+
+<section id="ADC">
+<title>Analog-to-Digital Converter (ADC)</title>
+<para id="adc1">
+The F2812 DSP has a 12-bit ADC core with built-in dual sample-and-hold (S/H).  Its options include:
+<list id="adclist" list-type="bulleted">
+<item>Simultaneous sampling or sequential sampling mode</item>
+<item>Operating as two independent 8-state sequencers or as a one large 16-state sequencer</item>
+<item>16-channel, multiplexed inputs</item>
+<item>Multiple source triggers for the start-of-conversion (SOC) sequence</item>
+</list>
+</para>
+
+<para id="adc2">
+A block diagram of the ADC module from TI documents:
+</para>
+
+
+<figure id="fig10">
+<media id="idp1106208" alt=""><image src="../../media/F2812ADCBlockDiagram.jpg" mime-type="image/jpeg"/></media>
+<caption>Texas Instruments' ADC Block Diagram</caption>
+</figure>
+
+<exercise id="adcPROB">
+<problem id="idm20752">
+<para id="adc4">
+Set the following ADC registers as follows:
+<table frame="all" id="adctable1" summary="">
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead valign="top">
+<row>
+<entry align="center">Register Name</entry>
+<entry align="center">Register Value (HEX)</entry>
+</row>
+</thead>
+<tbody valign="top">
+<row>
+<entry>AdcRegs.ADCMAXCONV.all</entry>
+<entry>0x0001</entry>
+</row>
+<row>
+<entry>AdcRegs.ADCCHSELSEQ1.bit.CONV00</entry>
+<entry>0x3</entry>
+</row>
+<row>
+<entry>AdcRegs.ADCCHSELSEQ1.bit.CONV01</entry>
+<entry>0x2</entry>
+</row>
+<row>
+<entry>AdcRegs.ADCTRL2.bit.EVA_SOC_SEQ1</entry>
+<entry>1</entry>
+</row>
+<row>
+<entry>AdcRegs.ADCTRL2.bit.INT_ENA_SEQ1</entry>
+<entry>1</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+Which register enables or:
+<list id="adc" list-type="enumerated">
+<item>Sequential sampling?</item>
+<item>16-bit cascaded mode?</item>
+<item>Event manager A to be the source trigger for the SOC sequence?</item>
+<item>Selects ADCIN3 and ADCIN2 for input channels?</item>
+<item>Does one conversion on the sequence?</item>
+</list>
+Which 16 registers does the ADC place its results?
+</para>
+</problem>
+</exercise>
+</section>
+
+<section id="EVA">
+<title>Event Manager A (EVA)</title>
+<para id="eva1">
+The event manager peripheral in the DSP includes general-purpose (GP) timers, full-compare/PWM units, capture units, and quadrature-encoder pulse (QEP) circuits.  You will use event manager A (EVA) to trigger the SOC sequence in the ADC.
+</para>
+
+<para id="eva2">
+EVA functional diagram from TI documents:
+</para>
+
+
+<figure id="fig11">
+<media id="idp742080" alt=""><image src="../../media/F2812EVFunctionOverview.jpg" mime-type="image/jpeg"/></media>
+<caption>Texas Instruments' EVA Functional Overview</caption>
+</figure>
+
+<exercise id="evaPROB">
+<problem id="idp316320">
+<para id="eva4">
+Set the following EVA registers as follows and describe what each one will do:
+<table frame="all" id="evatable1" summary="">
+<tgroup cols="2" align="left" colsep="1" rowsep="1">
+<thead valign="top">
+<row>
+<entry align="center">Register Name</entry>
+<entry align="center">Register Value (HEX)</entry>
+</row>
+</thead>
+<tbody valign="top">
+<row>
+<entry>EvaRegs.T1CMPR</entry>
+<entry>0x00fa</entry>
+</row>
+<row>
+<entry>EvaRegs.T1PR</entry>
+<entry>0x1f4</entry>
+</row>
+<row>
+<entry>EvaRegs.GPTCONA.bit.T1TOADC</entry>
+<entry>1</entry>
+</row>
+<row>
+<entry>EvaRegs.T1CON.all</entry>
+<entry>0x1043</entry>
+</row>
+</tbody>
+</tgroup>
+</table>
+</para>
+</problem>
+</exercise>
+</section>
+
+<section id="Interrupts">
+<title>Interrupts</title>
+<para id="interrupts1">
+Interrupts, as described by Dr. Choi in one of his lab manuals in ELEC 434, provide a mechanism for handling any infrequent or exception event.  The interrupt causes a CPU to make a temporary transfer of control from its current location to another location that services the event.  Variety of sources, internal and external to the CPU, can generate interrupts.  The use of interrupts greatly increases the performance of the CPU by allowing the I/O devices direct and rapid access to the CPU and by freeing the CPU from the task of continually testing the status of its I/O devices.  The I/O devices assert interrupts to request the CPU to start a new I/O operation, to signal the completion of an I/O operation, and to signal the occurrence of hardware and software errors.
+</para>
+
+<para id="interrupts2">
+The F2812 DSP supports one nonmaskable interrupt (NMI) and 16 maskable prioritized interrupt requests (INT1-INT14, RTOSINT, and DLOGINT) at the CPU level.
+</para>
+
+<exercise id="labPROB">
+<problem id="idm6276752">
+<para id="interrupts3">
+Program the interrupts for the ADC and the SPI along with the functions for:
+<list id="labPROBlist" list-type="enumerated">
+<item>Two’s complement of the ADC output</item>
+<item>Send to appropriate filter</item>
+<item>Filter’s output to be reconverted to unsigned integers</item>
+<item>Send to DAC</item>
+</list>
+You should hear the filtered audio through the speakers.
+</para>
+</problem>
+</exercise>
+</section>
+</content>
+</document>

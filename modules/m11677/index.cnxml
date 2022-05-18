@@ -1,0 +1,676 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Preparing for OrCAD Layout</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>8c424ba4-dc1b-447a-96f6-7d840b063bfb</md:uuid>
+</metadata>
+
+  <content>
+<note type="warning" id="idp640608">The Connexions version of the OrCAD tutorial is still in development. Please <link url="http://koala.ece.rice.edu/index.cfm?page=pub"> click here</link> for the original and complete tutorial. You may also browse this complete tutorial within Connexions by using the Mozilla browser and accessing the main Connexions page at <link url="http://cnx.rice.edu">http://cnx.rice.edu</link>.  Click on the 'Contents' tab and select Rice University ELEC 424/427 under the 'Courses' tab.</note>
+<section id="Annotation">
+<title>Annotation</title>
+<para id="Annotation1">
+Now that your schematics are complete, you are ready to prepare to export the design to Layout. From now on, you will be working in both 
+Capture and Layout. The first step in preparing your design is to annotate it. Annotation really involves several steps. First, we will assign 
+unique reference designators to all of the parts in our circuit. Remember reference designators? These are just labels that are used in Layout 
+to uniquely identify different types of parts. If you look at the hierarchy view in the project window, you will see a jumble of reference designators. 
+You might have several capacitors named C1 or a lot of parts that have the label, R?, C?, U?, etc.
+</para>
+
+<figure orient="horizontal" id="horfig1">
+<subfigure id="subfig1">
+<media id="idp756032" alt=""><image src="../../media/HeirarchyView1.gif" mime-type="image/gif"/></media>
+<caption>Hierarchy View Before Annotation</caption>
+</subfigure>
+<subfigure id="subfig2">
+<media id="idp503824" alt=""><image src="../../media/HeirarchyView2.gif" mime-type="image/gif"/></media>
+<caption>Hierarchy View After Annotation</caption>
+</subfigure>
+</figure>
+
+<para id="Annotation2">
+To fix this, we will use a few of the annotation tools. In the file view of the project explorer, highlight the top-level design file (the one with the <term>
+dsn</term> extension) and then select <term>Tools--&gt;Annotate</term>. You will see the <term>Annotate</term> dialog box.
+</para>
+
+<figure id="fig1">
+<media id="idm523728" alt=""><image src="../../media/AnnotateDialog.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Annotation3">
+In a new design, it is best to first reset all the part designators. To do this, click the radio button that says <term>Reset Part References to “?”</term> 
+and then click <term>OK</term>. You will be asked if you want to save your design before proceeding. Every part in your design will now have a 
+question mark in its reference designator instead of a number. Now, reopen the annotate dialog box and check the box that says <term>Incremental 
+Reference Update</term> and click <term>OK</term>. This will go through your entire design and number each part starting with 1 for each part type. 
+If you now look in the hierarchy view, you will see that you have a nicely ordered list of parts.
+</para>
+</section>
+
+<section id="Intersheet">
+<title>Intersheet References</title>
+<para id="Intersheet1">
+The next thing we will do is add intersheet references to your schematics. Doing this will place page numbers near each off-page connector that indicate to 
+which other pages that net is connected. This is invaluable during design and debug because it will help you track individual nets across a large design 
+in many pages of schematics. Since we only have two pages of schematics in this design, we could probably get away without adding intersheet references; 
+however, it is a useful tool and should always be used for good design practice. Another reason for using this tool is that it helps to find mistakes in naming 
+nets. For example, say you have a net named CLKIN but on one page of schematics you mislabel this net CLKIM. After annotation, these two off page 
+connectors will not have page numbers next to them, indicating that they are single-pin nets. This would be an immediate warning flag that something is 
+seriously wrong with your schematics. To add intersheet references, bring up the annotate dialog box again. Select the radio button that is labeled <term>
+Add Intersheet References</term>. You will get a secondary dialog box, and you can leave the default values as they are for now. Just click <term>OK</term> 
+to continue. As far as schematics are concerned, your design is now fairly complete.
+</para>
+</section>
+
+<section id="Creating">
+<title>Creating Footprint Libraries</title>
+<para id="Creating1">
+We are now ready to begin working in layout to proceed with our design. The first thing we need to do is create a library of footprints to be used in our PCB 
+layout. Footprints  are a representation of the physical area that a part occupies on a PCB.
+</para>
+
+<note id="idp639216">Footprints are also sometimes referred to as shapes or land patterns.</note>
+
+<para id="Creating2">
+<note type="warning" id="idp167664">I cannot overemphasize this point. <term>IT IS ABSOLUTELY CRUCIAL THAT YOUR FOOTPRINTS ARE CORRECT</term>. Double-check 
+them, triple-check them. It is sometimes possible to live with an error in a schematic symbol, but a footprint error can often sink your entire design. Please be 
+<term>VERY CAREFUL</term>.
+</note>
+</para>
+
+<para id="Creating3">
+Start Layout Engineer’s Edition  to begin working with footprints. Libraries for Footprints are very similar to libraries for schematic parts. Layout has a 
+separate tool for working with footprint libraries, though. To start this tool, select <term>Tools--&gt;Library Manager</term>. You will get a new window that 
+looks like this.
+</para>
+
+<note id="idp673424">There are two versions of Layout: Engineer’s Edition and Plus. They are identical with the exception that Plus has an autorouter. We will not use 
+this feature.</note>
+
+<figure id="fig2">
+<media id="idp681440" alt=""><image src="../../media/LibraryManager.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating4">
+You will notice that there are already several libraries available for use. OrCAD has many existing footprints that you can use in your own design. As with 
+the schematic symbols, be very careful to check that these footprints for correctness before using them. Often, you will have to make footprints for parts 
+that don’t already have one. Most datasheets for parts will contain the mechanical information necessary to make a correct footprint. However, before 
+making a footprint it is necessary to understand a little bit about how PCBs are constructed.
+</para>
+
+<para id="Creating5">
+Let’s take a look at a padstack definition for an existing part. In the <term>Library Manager</term>, select the library <term>DIP100T</term> and highlight the first part 
+<term>DIP.100/14/W.300/L.700</term>. You will see the part footprint in the <term>Library Manager</term>.
+</para>
+
+<figure id="fig3">
+<media id="idp49872" alt=""><image src="../../media/DipFootprint.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating6">
+Layout uses a series of spreadsheets to store information about your design. Padstacks are stored in the padstack spreadsheet. To access this spreadsheet, 
+click the <term>View Spreadsheet</term> icon and choose <term>Padstacks</term>. This footprint is composed of two padstacks, one for pin 1, which is 
+square, and another padstack for the other pins. When you open the spreadsheet, you will first see a padstack called <term>T1</term>. Padstacks <term>T1
+</term> to <term>T7</term> are default padstacks and can be modified for your own use. The padstacks we want to look at are at the bottom of the list; 
+scroll down until you see <term>DIP100T.llb_pad1</term> or <term>DIP100T.llb_pad2</term>. These are the two padstacks for this footprint. You will 
+notice that there are numbers on some of the layers that define how the padstack looks physically on that particular layer. We will come back to this in a 
+minute.
+</para>
+
+<figure id="Pad1">
+<media id="idm6670192" alt=""><image src="../../media/ViewSpreadsheet.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating7">
+Close the padstack spreadsheet and open up the footprints spreadsheet. The name is confusing; it should really be called something like the pins 
+spreadsheet because this spreadsheet defines the locations of the pins and also which padstack they use. You will see each pin for the part in this 
+spreadsheet, its x and y locations, and the padstack used for each pin. Notice that pin 1 uses the square padstack, while the others use the round one.
+</para>
+
+<para id="Creating8">
+Now let’s create a new footprint from scratch for your design. We will make the footprint for the pushbutton (Panasonic part EVQ-PAG04M). The 
+mechanical diagram from the datasheet gives us all the information we need to know.
+</para>
+
+<figure id="fig4">
+<media id="idp788512" alt=""><image src="../../media/PushButtonDrawing.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating9">
+In the <term>Library Manager</term>, click <term>Create New Footprint</term>. This will bring up the following dialog box.
+</para>
+
+<figure id="fig5">
+<media id="idm244192" alt=""><image src="../../media/CreateNewFootprint.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating10">
+Name the footprint <term>PB</term>, and keep <term>English</term> for the <term>Units</term>. Even though the dimensions for the part are 
+given in metric, most PCB fabrication measurements are still done in inches (or mils, 1/1000 of an inch). We can switch between the two systems 
+fairly easily in OrCAD. Click <term>OK</term> to create the part. You will now see a new part with just one pin in the <term>Library Manager</term>.
+</para>
+
+<para id="Creating0">
+Since this is a metric part, we need to change the systems settings to use metric instead of English. Select <term>Options--&gt;System Settings</term> 
+to bring up the following dialog. Change the systems settings as shown.
+</para>
+
+<figure id="fig6">
+<media id="idp64848" alt=""><image src="../../media/SystemSettings.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating11">
+Click <term>OK</term> when you have made the changes. Now you are working in a metric system. The switch has 4 pins total, but we only need to 
+define one padstack since the pins are all the same physically (not electrically). Open the padstacks spreadsheet. We will edit the padstack <term>T1
+</term>, which is already being used by pin1. First, let’s start from scratch and fill in information for only the layers that we care about. In the spreadsheet, 
+double-click the padstack name <term>T1</term>. This brings up the <term>Edit Padstack</term> dialog for all layers in the padstack. 
+</para>
+
+<figure id="fig7">
+<media id="idm275376" alt=""><image src="../../media/EditPadstack.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating12">
+First, change the name of the padstack to something more useful like <term>PB</term> (the name of our footprint). Doing this will make this padstack 
+easier to find in Layout when there are 100s of padstacks to choose from. Next, select the <term>Undefined</term> radio button. This will reset the 
+padstack definitions on every layer. Click <term>OK</term> to continue. In the spreadsheet you should now see a padstack called <term>PB</term> 
+with no layers defined.
+</para>
+
+<figure id="fig8">
+<media id="idp375760" alt=""><image src="../../media/UndefinedPadstack.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating13">
+We will now set each layer individually. You can also select multiple layers at a time by holding down the <term>CTRL</term> key when you click 
+the layer name. First, let’s define the size of the drill used for this part. The datasheet tells us that we need a drill of 1 mm for this part. Select the layers 
+<term>DRLDWG</term> and <term>DRILL</term>. When you have multiple layers selected, you will need to right-click and choose <term>Properties
+</term> to bring up the <term>Edit Padstack</term> dialog. Choose the <term>Round</term> radio button and give the width and height a value of 1. 
+Click <term>OK</term> when done. The changes you made should now be reflected in the spreadsheet.
+</para>
+
+<para id="Creating14">
+Now we will define the amount of metal on the routing layers beyond the size of the drill. This is called the annular ring. Each board shop will have 
+requirements on the minimum annular ring size based on the drill diameter. In most cases 20 mils (1 mil = 1/1000 inch) is a safe bet. 1 mm is approximately 
+40 mils, so 20 mils is about 0.5 mm. Select the following layers and bring up the <term>Edit Padstack</term> dialog: <term>TOP, BOTTOM, INNER</term>. 
+Even though we have no inner routing layers, it is good practice to go ahead and define them. Make the pads round and put the value of 1.5 in the height 
+and width fields.
+</para>
+
+<para id="Creating15">
+Next, we need to define the clearance on the plane layers. The middle layers of our circuit board are solid pieces of copper that are used for power and 
+ground. To prevent short circuits, we need to define a clearance around our drill. Most board houses will also have requirements for this, but 35 mils 
+beyond the drill size is usually a good start. In our case, we will do a little rounding and just use 2 mm.  Select the <term>PLANE</term> layer and define 
+a round pad with a height and width of 2 mm.
+</para>
+
+<para id="Creating16">
+The last thing we need to define is the solder mask. This is usually defined as slightly larger (about 5 mils) than the annular rings on the top and bottom 
+layers. Select <term>SMTOP</term> and <term>SMBOT</term> and make them round pads with height and width of 1.625 mm.
+</para>
+
+<para id="Creating17">
+You have finished defining your padstack for this part. You can close the spreadsheet and you will see that pin 1 should now look a little different based 
+on the changes you just made.
+</para>
+
+<para id="Creating18">
+You probably noticed that you don’t need to define all of the layers. As a guide, here are the layers that you need to define for thru-hole and surface mount parts.
+<list id="parts" list-type="bulleted">
+<item><term>Thru-Hole - TOP, BOTTOM, INNER, PLANCE, SMTOP, SMBOT, DRLDWG, DRILL</term></item>
+<item><term>Surface Mount - TOP, SMTOP, SPTOP </term></item>
+</list>
+</para>
+
+<para id="Creating19">
+As far as padstacks are concerned, surface mount parts are a lot easier to work with.
+</para>
+
+<para id="Creating20">
+<term>Library Manager</term> can be a bit flaky sometimes, so it is best to save your changes to footprints often. Go ahead and click <term>Save As</term>. 
+You have not yet created a footprint library, so you will need to click the <term>Create New Library</term> button. Browse to your <term><code>lib</code></term> 
+directory and name the library <term>Elec424Tutorial</term>.
+</para>
+
+<para id="Creating21">
+Let’s now clean up a few things before adding the rest of the pins. You will see a lot of text on your screen. Most of it is on the layer <term>ASSYTOP</term>, which 
+we will not use. This text is safe to delete. Open the text spreadsheet and you will see five text items. Select all the text on the <term>ASSYTOP</term> layer and delete 
+them. This will clean up your footprint a bit. You can leave the reference designator text on the <term>SSTOP</term> layer. We will need it.
+</para>
+
+<para id="Creating22">
+We can add pins to the footprint in a number of ways, but the easiest way to do this is to use the footprints spreadsheet. Open the spreadsheet and you will see just 
+pin 1 with an x,y location of 0,0. 
+</para>
+
+<para id="Creating23">
+<note type="warning" id="idp805088">ALWAYS PLACE PIN 1 AT 0,0. </note>
+</para>
+
+<para id="Creating24">
+For this part we have to take note of a few things. Our schematic symbol has pins 1 to 4, while the datasheet for the part labels the pins A, A', B and B'. We will make 
+pin 1 = A', pin 2 = A, pin 3 = B and pin 4 = B'. To create a new pin, just highlight pin 1 in the spreadsheet and type <term>CTRL-C</term>. This will create open the 
+following <term>Add Pad</term> dialog.
+</para>
+
+<figure id="fig9">
+<media id="idp53952" alt=""><image src="../../media/AddPad.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating25">
+This dialog allows you to give the pad a name (OrCAD autoincrements, so 2 is already given as the name), adjust the x and y coordinates of the pin, and choose 
+which padstack you want to use for the pin. In most cases, you will leave the other settings as they are by default. Set the x and y coordinates as they are shown 
+above and click <term>OK</term>. Add the remaining two pads as shown on the mechanical drawing for the pushbutton. When you close the footprint spreadsheet, 
+your footprint should look like this.
+</para>
+
+<figure id="fig10">
+<media id="idp2500256" alt=""><image src="../../media/FootprintPadsPlaced.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating26">
+You are not quite done with the footprint even though all the pins are placed. There are just a few things left to do. First, we need to define a place outline. A place 
+outline is a mechanical boundary that Layout uses to keep parts from hitting each other once assembled. In this case, the part outline is easy to draw. The physical 
+switch does not extend beyond the square defined by the pads, so we will just draw a box around them. To do this we use the <term>Obstacle Tool</term>. 
+
+<figure id="Obs1">
+<media id="idp193120" alt=""><image src="../../media/ObstacleTool.gif" mime-type="image/gif"/></media>
+</figure>
+
+Click the tool icon to switch to the obstacle tool and then right-click in the workspace. Select <term>New</term> from the context menu. Right-click again and select <term>
+Properties</term>. The following dialog box will appear.
+</para>
+
+<figure id="fig11">
+<media id="idm7033888" alt=""><image src="../../media/EditObstacle.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating27">
+Give the obstacle a meaningful name. Select <term>Place Outline</term> as the <term>Obstacle Type</term>. The width in this case is arbitrary. The layer is very 
+important. This part is a thru-hole part, so in this case we want to make sure that surface mount parts on the bottom side of the board will not interfere with this part. 
+By choosing <term>Global Layer</term>, the place outline will extend through every layer of the board. If this were a surface mount part, we could put the place outline 
+on the top layer only. Click <term>OK</term> when you are done making changes. Now you need to draw the outline. Left-click to place each corner. When you have 
+drawn at least 3 corners, you can press ‘<term>F</term>’ to have OrCAD finish the outline for you. It should look like this.
+</para>
+
+<figure id="fig12">
+<media id="idp497008" alt=""><image src="../../media/FootprintWithOutline.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Creating28">
+There is just one last thing you need to do to make your footprint complete. It is often nice to have an outline of the part on the silkscreen layer. This is not necessary, 
+but it is a nice touch and makes things a bit easier during assembly of your board. We can easily make this outline by copying the place outline in the obstacles 
+spreadsheet. Open the obstacle spreadsheet and copy the place outline by highlighting it and pressing <term>CTRL-C</term> just like you did for copying a pin. 
+Double-click the new obstacle to bring up the <term>Edit Obstacle</term> dialog. Give the obstacle a meaningful new name, change the type to <term>Detail</term>, 
+and change the layer to <term>SSTOP</term>.
+</para>
+
+<para id="Creating29">
+Congratulations! You have created your first footprint.
+</para>
+
+<para id="Creating30">
+I have provided a library of the remaining footprints for use in this design. Use the <term>Add…</term> button to add the library to the list of available libraries. 
+Use the <term>Save As</term> button to copy each footprint into your own library. You can find this library on Owlnet at:
+</para>
+
+<para id="Creating31">
+<code>/home/jpfrantz/elec424/tutorial/lib/tutorial.llb</code>
+</para>
+
+<para id="Creating32">
+Copy all of the parts from this library into your library.
+</para>
+</section>
+
+<section id="Assigning">
+<title>Assigning Footprints to Parts</title>
+<para id="Assigning1">
+You will now switch back briefly to working in Capture. Open your tutorial schematics if they are not already open. You have defined a set of footprints to be used 
+in your design, but now you must assign those footprints to each of the parts in your design. Each part in your schematics has a property called <term>PCB Footprint
+</term> and this must match one of the footprints in your footprint library. There are several ways to assign footprints to schematic symbols. One way is to open the 
+<term>Property Editor</term> by double-clicking the part in schematics. This will show you all the properties for that part. Double click the pushbutton switch on the 
+first page of your schematics. This is the part whose footprint you just drew. 
+</para>
+
+<figure id="fig13">
+<media id="idm6115408" alt=""><image src="../../media/PropertyEditor1.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Assigning2">
+There are quite a few properties, and it may seem a bit confusing. Using the drop-down list, you can filter by specific properties. Choosing <term>Orcad-Layout</term> 
+will help make things make a little more sense. You should be able to see the <term>PCB Footprint</term> property now and assign it a value of <term>PB</term>, the 
+name of the footprint you just drew.
+</para>
+
+<para id="Assigning3">
+Now imagine that you have hundreds of parts in your design. It could take quite a while to assign each footprint to every part. It would be much better if we could do 
+it en masse. Fortunately, there are several methods we can use to do this. Close the property editor and press <term>CTRL-A</term> while on a page of schematics. 
+This will highlight every part on the page. Press <term>CTRL-E</term> to bring up the <term>Property Editor</term>. Now you can see the properties for every part 
+you have highlighted (make sure you are on the <term>Parts</term> tab of the spreadsheet because others are also visible). Now you can assign footprints to an entire 
+page at once.
+</para>
+
+<figure id="fig14">
+<media id="idm88400" alt=""><image src="../../media/PropertyEditor2.gif" mime-type="image/gif"/></media>
+</figure>
+
+
+<para id="Assigning4">
+This is certainly an improvement. Now you can manipulate all the parts on one page. But what if you had 10 or more pages of schematics? This could still be cumbersome. 
+In the next section, I will describe a much more powerful way of editing the properties in your design.
+</para>
+</section>
+
+<section id="Importing">
+<title>Importing and Exporting Properties To and From Schematics</title>
+<para id="Importing1">
+As you may have noticed by now, OrCAD stores quite of number of properties in the design file. However, it can sometimes be cumbersome to manipulate these in 
+OrCAD itself. Luckily, it is possible to export the properties of your entire design so that they can be edited in another program like Microsoft Excel. We will use this 
+feature to assign footprints and other part information. After reading this section you may think that this is a lot of trouble to go through for this small amount of work. 
+For this design, that may be the case. However, in much larger designs this is truly a timesaver. 
+</para>
+
+<para id="Importing2">
+To export properties highlight the top-level design file in the file view of the project explorer (the one with the <term>dsn</term> extension). Then select <term>Tools
+--&gt;Export Properties…</term> You will see the following dialog.
+</para>
+
+<figure id="fig15">
+<media id="idm38704" alt=""><image src="../../media/ExportProperties.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Importing3">
+You can leave all the default selections. Just click <term>OK</term> to create the export file. It will be placed in the same directory as your schematic project and should 
+have an <term><code>exp</code></term> extension. We can now edit this file directly and re-import it into Capture. If you look at the file in a text editor like Notepad, 
+you will see that it is just a tab-delimited file with the values enclosed in quotation marks. Let’s open this file with Microsoft Excel so we can manipulate it better.
+</para>
+
+<para id="Importing4">
+Start Excel and select <term>File--&gt;Open…</term> Browse to where your file is located. You will probably have to change the file type to <term>All Types (*.*)</term> 
+to see the file. Selecting the file will start the <term>Text Import Wizard</term>. 
+</para>
+
+<figure id="fig16">
+<media id="idm7075744" alt=""><image src="../../media/TextImportWizard2.gif" mime-type="image/gif"/></media>
+</figure>
+
+
+<para id="Importing5">
+Click the <term>Next</term> button on the first screen. On the second screen, it is important to change the text qualifier to <term>{none}</term>. This will preserve the 
+quotes around the values. If you do not do this, then you will be unable to re-import the file back into OrCAD. When you have made this change you can go ahead and 
+click <term>Finish</term>. You will now have the data in Excel. Let’s do a few things to make moving around a little easier. First, I like to freeze the top two rows so that 
+they are always visible. This way I can always see what the name of each column is. To do this, click row 3 to highlight the entire row. Then select <term>Window--&gt;Freeze 
+Panes</term>.
+</para>
+
+<figure id="fig0">
+<media id="idp1406000" alt=""><image src="../../media/FreezePanes.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Importing6">
+Next, I like to sort the spreadsheet so that it makes a little more sense. Highlight all of the rows and columns of your spreadsheet except the first row. Then select <term>
+Data--&gt;Sort…</term> to bring up the <term>Sort</term> dialog.
+</para>
+
+
+
+<para id="Importing7">
+I like to sort by <term>Value</term> and then by <term>Part Reference</term>. Once this is done, your parts should all be grouped by common value. For example, all of 
+your 0.1uF capacitors should be next to each other. This will make it much easier to assign footprints and other properties to similar parts.
+</para>
+
+<figure id="fig17">
+<media id="idp7888" alt=""><image src="../../media/Sort.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Importing8">
+<note id="idp700816">It is crucial that parts with the same value all have the same text in their value fields. For example, you may know that .1uf and 0.1uF are the same thing, but OrCAD 
+treats that as two separate values and will think that the two are completely different parts. This will complicate parts ordering and make your BOM (parts list) unreadable. 
+If you find discrepancies like this, you can fix it in Excel or in OrCAD.
+</note>
+</para>
+
+<para id="Importing9">
+Fill in the remaining footprints based on the chart below. The reference designators in your schematics may vary slightly from those in the table, but this will make no 
+difference to the design. Two things are important when you are assigning the footprints. First, make sure that you enclose the value in quotation marks or the import 
+back into OrCAD won’t work. Second, make sure that the footprint name matches exactly the name that you gave your footprint in your library. If the name does not match, 
+then you will get errors when you export your design to Layout.
+</para>
+
+<figure id="fig18">
+<media id="idp1822512" alt=""><image src="../../media/RefDesignators.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Importing10">
+Save the file in Excel. You will get several warnings about the incompatibility of the format. You can just ignore these. There is one small last step that we need to do 
+before we can import back into OrCAD. Excel will replace one set of double quotes with three, so we need to open the file in a text editor. Use Notepad or another text 
+editor to open the file and do a search and replace to change <term>"""</term> with <term>"</term>. Save the file when you are done.
+</para>
+
+<para id="Importing11">
+Now you can import the properties file back into OrCAD. In Capture, highlight the design file in the file view of the project explorer. <term>Select Tools--&gt;Import 
+Properties…</term> Browse to your properties file and click <term>OK</term>. You should not get any errors during the import. If you do, then there is likely a wrong 
+footprint name or some missing quotation marks in the file. You will need to correct this before proceeding.
+</para>
+</section>
+
+<section id="Embedding">
+<title>Embedding the BOM in Schematics</title>
+<para id="Embedding1">
+You may have noticed in Excel that some parts had some extra information. OrCAD is a great place to store information about where parts are bought, who makes them, 
+how much they cost, etc. If all the information is there, then OrCAD can use the information to automatically generate the BOM (Bill of Materials). The BOM will help 
+you be organized when ordering parts, and it is essential for the person assembling your board. There are several extra fields that you probably saw with this kind of 
+information.
+</para>
+
+<list id="BOMfields" list-type="bulleted">
+<item><term>Description</term> – A description of the part. Usually I cut and paste this from the description of the part from the supplier’s web page (e.g. Digi-Key).</item>
+<item><term>ManPartNum</term> – The manufacturer’s part number.</item>
+<item><term>Manufacturer</term> – The manufacturer of the part.</item>
+<item><term>Notes</term> – Any miscellaneous information about the part that you want to record. Maybe it has a long lead-time and you want to note that.</item>
+<item><term>PerUnitCost</term> – How much each part costs.</item>
+<item><term>SupPartNum</term> – The supplier’s part number (e.g. Digi-Key, Arrow, Newark, etc.).</item>
+<item><term>Supplier</term> – The supplier of the part.</item>
+</list>
+
+<para id="Embedding2">
+Export the properties of your design again and fill in the information for each part. To help you, I have put an Excel version of the BOM in the following location on Owlnet.
+</para>
+
+<para id="Embedding3">
+<code>/home/jpfrantz/elec424/tutorial/assy/BOM.xls</code>
+</para>
+
+<para id="Embedding4">
+When you have finished editing the properties, save the file and import them into Capture just like you did for the footprints.
+</para>
+
+<para id="Embedding5">
+Now you are ready to have OrCAD generate a BOM for you. To do this, highlight the design file in the file view of the project explorer. Select <term>Tools--&gt;
+Bill of Materials…</term> to bring up the <term>Bill of Materials</term> dialog.
+</para>
+
+<figure id="fig19">
+<media id="idm169776" alt=""><image src="../../media/BillOfMaterials.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="Embedding6">
+You will want to change a few of the default settings. Cut and paste the following text into the <term>Header</term> and <term>Combined Property String</term>
+ fields of the dialog box.
+</para>
+
+<para id="Embedding7">
+<code>Item\tQuantity\tReference\tPart\tDescription\tSupplier\tSupPartNum\tManufacturer\tManPartNum\tUnitCost\tNotes</code>
+</para>
+
+<para id="Embedding8">
+<code>{Item}\t{Quantity}\t{Reference}\t{Value}\t{Description}\t{Supplier}\t{SupPartNum}\t{Manufacturer}\t{ManPartNum}\t{PerUnitCost}\t{Notes}</code>
+</para>
+
+<para id="Embedding9">
+Then click <term>OK</term> to generate the file. This should put a file called <term>Elec424Tutorial.bom</term> in your <term><code>sch</code></term> directory. 
+This will be a tab-delimited file just like when you exported the design properties. You can use Excel or another program to make it look a little more readable. Do this 
+and put the finished version into the <term><code>assy</code></term> directory. This is one of the files that you will give to the assembler when you are ready to 
+have your boards assembled.
+</para>
+</section>
+
+<section id="CreatingBoard">
+<title>Creating a Board Template File</title>
+<para id="CreatingBoard1">
+You are almost ready to export your schematic design to Layout. Before doing this, we must create a board template file. This file defines some default properties for 
+the board that will be used throughout layout. To create a template, start Layout and select <term>File--&gt;New</term>. When you see the dialog, press <term>Cancel
+</term>. You should now see a blank workspace. You can use the same shortcut keys that you used in Capture to zoom and center the design (‘<term>I</term>’, ‘<term>
+O</term>’, and ‘<term>C</term>’).
+</para>
+
+<figure id="fig20">
+<media id="idm76240" alt=""><image src="../../media/BlankBoardTemplate.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="CreatingBoard2">
+The first thing we need to do is draw a board outline to define the perimeter of the board. For this PCB, we will make the board 3 inches by 2 inches. The board outline is 
+an obstacle like the ones you placed in the footprint editor. To create the board outline, select the <term>Obstacle Tool</term>, right-click and choose <term>New…
+</term> and then right-click again and select <term>Properties…</term> Name the obstacle <term>BOARD_OUTLINE</term>, its type should be <term>Board Outline
+</term>, its <term>Width</term> should be 50 (mils) and it should be placed on the <term>Global Layer</term>. Place the first corner of the board at 0,0 and then draw 
+from there. While drawing, you can use the information in the status bar to tell you where in the workspace you are. When finished, your board outline should look like 
+this.
+</para>
+
+<figure id="fig21">
+<media id="idp2492592" alt=""><image src="../../media/BoardOutline.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="CreatingBoard3">
+Next, you will edit the layer stackup. Layout has spreadsheets just like the <term>Library Manager</term> does. Click the <term>View Spreadsheet</term> icon and 
+select <term>Layers</term>. This spreadsheet defines all the layers that your board uses and their respective functions in the design. You will see a spreadsheet that 
+looks something like this.
+</para>
+
+<figure id="fig22">
+<media id="idm7356304" alt=""><image src="../../media/Layers.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="CreatingBoard4">
+You are making a 4-layer board, so we will turn off some of the pre-defined layers because we will not use them. Double-click the <term>INNER1</term> layer to bring 
+up the <term>Edit Layer</term> dialog.
+</para>
+
+<figure id="fig23">
+<media id="idp3371280" alt=""><image src="../../media/EditLayer.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="CreatingBoard5">
+Select the Radio button for <term>Unused Routing</term>. Click <term>OK</term> to continue. Do the same thing for the following layers: <term>INNER2</term>, 
+<term>SPTOP</term>, <term>SPBOT</term>, <term>SSBOT</term>, <term>FABDWG</term>, <term>NOTES</term>. Remember that you can use the <term>CTRL
+</term> key to select multiple layers at one time. Also remember that all designs are different and may need extra layers. For example, a design with surface mount 
+components will need the <term>SPTOP</term> and <term>SPBOT</term> layers. If we were to place components on the bottom side of the board, then we would 
+likely need a silkscreen on the bottom and, therefore, the <term>SSBOT</term> layer. Close the spreadsheet when you have made the changes.
+</para>
+
+<para id="CreatingBoard6">
+The next thing we need to do is change the output settings for the Gerber files . Select <term>Options--&gt;Post Process Settings…</term> to bring up the <term>Post 
+Process Spreadsheet</term>. Select the <term>*.ASB</term> and <term>*.FAB</term> layers. Right-click and select <term>Properties</term> to bring up the <term>
+Post Process Settings</term> dialog. Uncheck the box that is labeled <term>Enable for Post Processing</term>.
+</para>
+
+<para id="CreatingBoard7">
+<note id="idm6489888">Gerber files are in a special format that the board house can read. These are the files used to generate film and fabricate your board. There is one file per layer 
+of your design.</note>
+</para>
+
+<figure id="fig24">
+<media id="idm7389056" alt=""><image src="../../media/PostProcessSettings.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="CreatingBoard8">
+Now select all the layers. You can do this by clicking in the cell in the top-left corner of the spreadsheet (<term>Plot Output File Name</term>). Right-click and select 
+<term>Properties</term> to bring up the <term>Post Process Settings</term> dialog. Select the radio button for <term>Extended Gerber</term>. This is the format we 
+want to use for fabrication. Close the spreadsheet when you are done.
+</para>
+
+<para id="CreatingBoard9">
+Next, you will define a default via  size. Click the <term>View Spreadsheet</term> icon and select <term>Padstacks</term>. This will open the padstacks spreadsheet 
+and shows every padstack that is used in your design. Since there are no parts in the design right now, there are not that many padstacks, but this will change after we 
+import from Capture.
+</para>
+
+<para id="CreatingBoard10">
+<note id="idp2675872">Vias are used to connect traces between layers and to make connections to solid ground or power planes.</note>
+</para>
+
+<para id="CreatingBoard11">
+You will edit the <term>VIA1</term> padstack that is first on the list. This will become the default via for your design. Editing padstacks here is identical to how you 
+edited padstacks when creating a footprint. Let’s start with a clean padstack. Click the name <term>VIA1</term> to highlight the entire padstack. Right-click and select 
+<term>Properties</term> to show the <term>Edit Padstack</term> dialog. Select the radio button labeled <term>Undefined</term> and also check the box labeled <term>
+Flood Planes/Pours</term>. Click <term>OK</term> when done. This will reset the definitions for all layers of <term>VIA1</term>. Now you will set the finished drill 
+size. Highlight the <term>DRILL</term> and <term>DRLDWG</term> layers and open the <term>Edit Padstack</term> dialog. Select a pad shape of <term>Round
+</term> and give it a width and height of 13.5 (mils). We are using the same clearance requirements that we used before when defining footprints: +20 mils annular ring, 
++25 mils solder mask, and +35 mils plane clearance. Select the <term>TOP</term>, <term>BOTTOM</term> and <term>INNER</term> layers (we have no inner layers in 
+this design, but it is good practice to define this since we may want to add layers later in a design). Make these layers round with a diameter of 35 mils. Select the <term>
+GND</term> and <term>POWER</term> layers and make these round with a diameter of 50. Finally, highlight the <term>SMTOP</term> and <term>SMBOT</term> 
+layers and make these round with a diameter of 40.
+</para>
+
+<para id="CreatingBoard12">
+We will only use one via type in our design, but OrCAD will allow you to define up to 16 different vias. You might want more than one if you wanted slightly larger 
+vias for carrying high-currents. You can even assign specific vias to specific nets, but that is beyond the scope of this tutorial.
+</para>
+
+<para id="CreatingBoard13">
+When a netlist from Capture is imported, we can set the default widths and other properties for all nets that get imported. After importing we can customize these 
+parameters on a per-net basis. Let’s set the values for the default net. Click the <term>View Spreadsheet</term> icon and choose <term>Nets</term>. You will see a 
+spreadsheet with just one net, <term>DEFAULT</term>. After you import your netlist from Capture, you will see all the nets in your design in this spreadsheet. 
+Double-click the net to bring up the <term>Edit Net</term> dialog.
+</para>
+
+<figure id="fig25">
+<media id="idm315040" alt=""><image src="../../media/EditNet.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="CreatingBoard14">
+Our design will not be too aggressive, so we will use 10 mil traces. Set the <term>Min Width</term> and <term>Conn Width</term> to 10, and set the <term>Max 
+Width</term> to 50. Click <term>OK</term> when you have made the changes.
+</para>
+
+
+<para id="CreatingBoard15">
+The final thing we need to do to our template is set a few global spacing constraints. These spacing values will be used when you have Layout automatically check 
+for design errors. Select <term>Options--&gt;Global Spacing…</term> to bring up the <term>Route Spacing</term> spreadsheet. Click on <term>Layer Name</term> 
+to highlight every cell, and then right-click and select <term>Properties</term> to bring up the <term>Edit Spacing</term> dialog. Put a value of 10 in every field 
+and click OK. Close the Route Spacing spreadsheet.
+</para>
+
+<figure id="fig26">
+<media id="idp4119552" alt=""><image src="../../media/EditSpacing.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="CreatingBoard16">
+Save your template. You are done with it and are ready to export your design from Capture to Layout.
+</para>
+</section>
+
+<section id="CreatNetlist">
+<title>Creating the Netlist</title>
+<para id="CreatNetlist1">
+To export your design to Layout, you must first create a netlist. A netlist is a file that has all the parts, footprints and nets for your design in a format that can be read 
+by the layout program. To start netlist generation, highlight your <term><code>dsn</code></term> file and select <term>Tools--&gt;Create Netlist…</term> to bring up 
+the <term>Create Netlist</term> dialog box.
+</para>
+
+<figure id="fig27">
+<media id="idp2704288" alt=""><image src="../../media/CreateNetlist.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="CreatNetlist2">
+Click on the <term>Layout</term> tab in the dialog box. You don’t need to modify any settings, just click <term>OK</term> to generate the netlist. When finished you 
+should have a file called <term>Elec424Tutorial.mnl</term> in your <term><code>sch</code></term> directory. Your design is finally ready for import into layout.
+</para>
+</section>
+
+
+
+
+
+  
+  </content>
+  
+</document>

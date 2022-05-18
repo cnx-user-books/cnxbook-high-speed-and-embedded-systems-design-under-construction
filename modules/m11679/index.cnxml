@@ -1,0 +1,37 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Archiving Your Design in OrCAD</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>74ec31b1-b579-4e96-ba90-58501a95f8e7</md:uuid>
+</metadata>
+
+  <content>
+<note type="warning" id="idp2896736">The Connexions version of the OrCAD tutorial is still in development. Please <link url="http://koala.ece.rice.edu/index.cfm?page=pub"> click here</link> for the original and complete tutorial. You may also browse this complete tutorial within Connexions by using the Mozilla browser and accessing the main Connexions page at <link url="http://cnx.rice.edu">http://cnx.rice.edu</link>.  Click on the 'Contents' tab and select Rice University ELEC 424/427 under the 'Courses' tab.</note>
+<para id="Archiving1">
+The final thing you should do is a little file cleanup in your directory hierarchy. OrCAD generates a lot of files that you don’t really need to keep (they can be generated again, if necessary). Below is a list of the files you need to keep in each directory. You can safely delete all the others.
+</para>
+
+<para id="Archiving2">
+<list id="Files" list-type="bulleted">
+<item>sch\*.opj – Capture project file</item>
+<item>sch\*.dsn – Capture design file</item>
+<item>sch\*.mnl – Layout netlist file</item>
+<item>lib\*.olb – Capture library file</item>
+<item>lib\*.llb – Layout library file</item>
+<item>board\*.max – Layout board file (You don’t need to keep the backup files)</item>
+<item>board\*.bot – Gerber file</item>
+<item>board\*.drd – Gerber file</item>
+<item>board\*.dts – Gerber file</item>
+<item>board\*.gnd – Gerber file</item>
+<item>board\*.gtd – Gerber file</item>
+<item>board\*.pwr – Gerber file</item>
+<item>board\*.smb – Gerber file</item>
+<item>board\*.smt – Gerber file</item>
+<item>board\*.sst – Gerber file</item>
+<item>board\*.top – Gerber file</item>
+<item>board\*.tpl – Layout template file</item>
+</list>
+</para>
+
+   
+  </content>
+  
+</document>

@@ -1,0 +1,177 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Schematic Entry in OrCAD</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>f2c97dc2-763d-4ec5-8ee2-d350733389cf</md:uuid>
+</metadata>
+
+  <content>
+<note type="warning" id="idp53616">The Connexions version of the OrCAD tutorial is still in development. Please <link url="http://koala.ece.rice.edu/index.cfm?page=pub"> click here</link> for the original and complete tutorial. You may also browse this complete tutorial within Connexions by using the Mozilla browser and accessing the main Connexions page at <link url="http://cnx.rice.edu">http://cnx.rice.edu</link>.  Click on the 'Contents' tab and select Rice University ELEC 424/427 under the 'Courses' tab.</note>
+<section id="SettingUp">
+<title>Setting Up the Environment</title>
+<para id="SettingUp1">
+Now that you have your parts library set up, you are ready to begin entering schematics. You can see from the project window that you 
+already have one page of schematics called <term>PAGE1</term> in a folder called <term>SCHEMATIC1</term>. If you can’t see this, 
+click on the ‘<term>+</term>’ next to the <term>dsn</term> file to expand the view. Even though our circuit is small enough to fit on one page, 
+we will use two pages to demonstrate a schematic with multiple pages. First add a new schematic page by right-clicking the schematic root folder 
+and selecting <term>New Page</term>. You will be prompted to provide a name for this page. Call it <term>Page 1 – Power and Connectors</term>. 
+Now rename the original page by right-clicking and selecting <term>Rename</term>. Call this <term>Page 2 – Xilinx PLD</term>. It is always nice 
+to give your schematic pages useful names. While you are at it, rename the schematic folder in the same manner, calling it <term>Elec424Tutorial</term>.
+</para>
+
+<para id="SettingUp2">
+Open page 1 of your schematics by double-clicking it in the project window. This will bring up a blank page. Before we place parts, let’s do a couple of 
+things. First, I like to make the page size a bit bigger than the default. You can fit a lot more onto the page and it will still look nice when printed. To do this 
+select <term>Options--&gt;Schematic Page Properties…</term> Click the <term>Custom</term> radio button and use the following values (width=15.2, height=11.5). 
+Second, there is a title block in the lower right corner. We are going to replace this with our own, so highlight the title block and delete it. We add a new title block 
+by selecting <term>Place--&gt;Title Block…</term> You will see the following dialog box.
+</para>
+
+<figure orient="horizontal" id="horfig">
+<subfigure id="subfig1">
+<media id="idp441760" alt=""><image src="../../media/PlaceTitleBlock1.gif" mime-type="image/gif"/></media>
+</subfigure>
+<subfigure id="subfig2">
+<media id="idp637360" alt=""><image src="../../media/PlaceTitleBlock2.gif" mime-type="image/gif"/></media>
+</subfigure>
+</figure>
+
+<para id="SettingUp3">
+The title block is in your library, so we need to add that to the list of libraries. Click the <term>Add Library</term> button to browse to and select the library you 
+created for the tutorial. Once you have added the library, you will be able to choose the <term>RiceTitleBlock</term> to add it to your design. Place the title block 
+in the lower right corner of your schematic page. The title block has fields to put information for each page of schematics. Double-click the text to edit each field 
+and change the information on each page so that it looks something like this.
+</para>
+
+<figure id="fig1">
+<media id="idp795936" alt=""><image src="../../media/TitleBlocks.gif" mime-type="image/gif"/></media>
+</figure>
+</section>
+
+<section id="PlacingParts">
+<title>Placing Parts and Making Connections</title>
+<para id="PlacingParts1">
+You are now ready to start placing the electrical components for your design. Open the first page of your schematics and click the <term>Place Part</term> icon 
+on the toolbar on the right side of the screen.  You will then get a dialog for choosing which part you want to place on your schematics.
+</para>
+
+<figure id="fig2">
+<media id="idp167792" alt=""><image src="../../media/PlacePart.gif" mime-type="image/gif"/></media>
+<caption>Place Part Icon</caption>
+</figure>
+
+<figure id="fig3">
+<media id="idp415232" alt=""><image src="../../media/PlacePartDialog.gif" mime-type="image/gif"/></media>
+<caption>Place Part Dialog</caption>
+</figure>
+
+<para id="PlacingParts2">
+Select the part <term>CONN JACK PWR</term> and click <term>OK</term>. Place the part on the left side of your schematic page. Now place the remaining parts 
+on both pages using the attached completed schematics as a guide. A PDF file of the schematics can also be found on Owlnet.
+</para>
+
+<para id="PlacingParts3">
+<code>/home/jpfrantz/elec424/tutorial/sch/Elec424Tutorial.pdf</code>
+</para>
+
+<para id="PlacingParts4">
+A small hint for moving around in OrCAD: use ‘<term>I</term>’ and ‘<term>O</term>’ to zoom in and out, respectively. ‘<term>C</term>’ will center the design 
+at your cursor. ‘<term>R</term>’ will rotate a part. You can do these actions while in the middle of another action (e.g. while placing a part).  You will also notice that 
+each part has a value associated with it. You can change this by double-clicking the current value. In this manner you can give all your capacitors, resistors, etc. the 
+appropriate values. When you are done, the first page of your schematics should look something like this.
+</para>
+
+<figure id="fig4">
+<media id="idp633984" alt=""><image src="../../media/SchematicNoConnections.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="PlacingParts5">
+Now we need to draw nets to make electrical connections between components. To do this, click the <term>Place Wire</term> icon and connect the components as 
+shown in the attached schematics. Use the <term>Place Bus</term> and <term>Place Bus Entry</term> icons to place busses and bus connections (you don’t need 
+to do this in these schematics). 
+</para>
+
+<figure orient="horizontal" id="horfig2">
+<subfigure id="subfig3">
+<media id="idp678992" alt=""><image src="../../media/PlaceWire.gif" mime-type="image/gif"/></media>
+<caption>Place Wire Icon</caption>
+</subfigure>
+<subfigure id="subfig4">
+<media id="idp774592" alt=""><image src="../../media/PlaceBus.gif" mime-type="image/gif"/></media>
+<caption>Place Bus Icon</caption>
+</subfigure>
+<subfigure id="subfig5">
+<media id="idp2805504" alt=""><image src="../../media/PlaceBusJunction.gif" mime-type="image/gif"/></media>
+<caption>Place Bus Entry Icon</caption>
+</subfigure>
+</figure>
+
+<para id="PlacingParts6">
+When you are done, the first page of your schematics should look like this.
+</para>
+
+<figure id="fig5">
+<media id="idp601984" alt=""><image src="../../media/SchematicWithConnections.gif" mime-type="image/gif"/></media>
+</figure>
+
+<para id="PlacingParts7">
+Now you need to add power and ground connections to some of the parts. OrCAD has several built-in symbols for power and ground. I like to use a symbol that 
+explicitly names the nets, as shown in the picture below. I do this because many designs will have multiple power and ground nets. Explicitly naming them helps 
+prevent shorts and other errors. It also makes your schematics easier to read. Add power and ground to your schematics now.
+</para>
+
+<figure id="fig6">
+<media id="idm7622688" alt=""><image src="../../media/PowerAndGround.gif" mime-type="image/gif"/></media>
+</figure>
+
+</section>
+
+<section id="Connecting">
+<title>Connecting Pages and Naming Nets</title>
+<para id="Connecting1">
+Since some of these connections go to the PLD, we need to a way to connect the two schematic pages together. We can do this by using off-page connectors. 
+To place these click the <term>Place Off-Page Connector</term> icon. Then select the connector called <term>OFFPAGELEFT-L</term> or <term>OFFPAGELEFT-R</term>, it doesn’t really matter which one, 
+they are functionally the same. You can place this on your schematic just like a part and then connect to it with a net. Off-page connectors are linked by a common 
+name. For example, two off-page connectors on separate pages with the name CLK will be considered by OrCAD to be one net. To name a connector, just double 
+click it to get a naming dialog box. Name your connectors now using the attached completed schematics as a guide.
+</para>
+
+<figure id="fig7">
+<media id="idp740720" alt=""><image src="../../media/PlaceOff-PageConnector.gif" mime-type="image/gif"/></media>
+<caption>Place Off-Page Connector Icon</caption>
+</figure>
+
+<para id="Connecting2">
+<note id="idp1381680">For reasons that will become clear later, I like to place my off page connectors as close to the edge of the page (right or left) as possible. This makes clear 
+which nets go off page and which don’t. It will also help you find mistakes on naming nets across pages.
+</note>
+</para>
+
+<para id="Connecting3">
+Normal nets can also be named. This is extremely useful and can help tremendously in the layout process. I encourage you to use the <term>Place Net Alias
+</term> icon to name any important nets such as clocks, address and data bus lines, and other specific signals you are interested in. To name a net, first highlight 
+the net you want to name and then click the icon, you will be given a dialog box to enter the name of the net. You can position the text anywhere you like. If you 
+have already attached an off-page connector to a net, then that net already has the same name as the connector. You don’t need to give the net an alias unless it 
+will make your schematics more readable.
+</para>
+
+<figure id="fig8">
+<media id="idm136672" alt=""><image src="../../media/PlaceNetAlias.gif" mime-type="image/gif"/></media>
+<caption>Place Net Alias Icon</caption>
+</figure>
+
+<para id="Connecting4">
+If you have any pins on parts that are left unconnected, use the <term>Place No Connect</term> icon to mark it in your schematics.
+</para>
+
+<figure id="fig9">
+<media id="idm244192" alt=""><image src="../../media/PlaceNoConnect.gif" mime-type="image/gif"/></media>
+<caption>Place No Connect Icon</caption>
+</figure>
+
+<para id="Connecting5">
+Now complete your schematics as shown in the attached reference.
+</para>
+
+</section>
+  </content>
+  
+</document>

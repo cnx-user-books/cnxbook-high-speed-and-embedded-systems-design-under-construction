@@ -1,0 +1,358 @@
+<document xmlns="http://cnx.rice.edu/cnxml" xmlns:md="http://cnx.rice.edu/mdml">
+  <title>Code Composer Studio Tutorial</title>
+  <metadata><md:content-id>undefined</md:content-id><md:title/><md:uuid>08c55a84-11b7-46da-ba88-10c40b936f14</md:uuid>
+</metadata>
+
+  <content>
+<section id="introduction">
+<title>Introduction</title>
+<para id="intro1">
+This is a brief tutorial over Code Composer Studio which is a programming environment used to implement various algorithms and load code onto a DSP.  If you would like a more in-depth tutorial, please feel free to click on <term>Help --&gt;Tutorial</term> in Code Composer.
+</para>
+</section>
+
+<section id="StartingCCC">
+<title>Starting Code Composer Studio</title>
+<para id="startccc1">
+Before starting, it would be a good idea to create a folder where you will be saving your project files.  Label the folder <term>ELEC424_Tutorial</term>.
+</para>
+
+<para id="startccc0">
+To open Code Composer Studio in a Windows 2000 system, click on <term>Start</term> and select <term>Programs --&gt; Texas Instruments --&gt; Code Composer Studio DSK Tools 2 (‘C2000) --&gt; Code Composer Studio</term>.
+</para>
+
+<figure id="fig2">
+<media id="idp986912" alt=""><image src="../../media/SelectingCodeComposer.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="startccc2">
+You should see the following screen:
+</para>
+
+<figure id="fig3">
+<media id="idp634384" alt=""><image src="../../media/CodeComposerWorkEnvironment.jpg" mime-type="image/jpeg"/></media>
+</figure>
+</section>
+
+
+<section id="creatingfile">
+<title>Creating a File</title>
+<para id="createfile1">
+To create a new source code file, click on <term>File --&gt; Source File</term>.  A window titled ‘<term>Untitled1</term>’ will appear within the Composer environment:
+</para>
+
+<figure id="fig5">
+<media id="idm109552" alt=""><image src="../../media/CreatingANewFile.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="createfile2">
+You can double-click on the ‘<term>Untitled1</term>’ window to make it larger.  
+</para>
+
+<para id="createfile3">
+To save your file, click on <term>File --&gt; Save</term>.  The following prompt will appear:
+</para>
+
+<figure id="fig6">
+<media id="idp923680" alt=""><image src="../../media/SavingAFilePrompt.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="createfile4">
+There are several <term>Save as type…</term> options.  Choose the appropriate one for your code.  It will give your file the proper file extension.  It is also lets the linker know when you compile your code what kind of language the file is written in.
+</para>
+
+<para id="createfile5">
+When you are done, click <term>Save</term>.
+</para>
+</section>
+
+<section id="creatingproject">
+<title>Creating a New Project</title>
+<para id="createproject1">
+After you have finished creating the files you need to run on the DSP, you will now want to create a project that will include all the files.  Select <term>Project --&gt; New…</term>
+</para>
+
+<para id="createproject2">
+The following prompt will appear:
+</para>
+
+<figure id="fig7">
+<media id="idp1019376" alt=""><image src="../../media/ProjectCreationDialog.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="createproject3">
+Fill in the project name in <term>Project Name</term>.  Browse to the folder you created for the project in <term>Location</term>.  Make sure you select <term>Executable (.out)</term> in <term>Project Type</term>, and select <term>TMS320C28XX</term> in <term>Target</term>.  When you are done, click <term>Finish</term>.
+</para>
+
+<para id="createproject4">
+<term>Example.pjt</term> will appear in the left-hand side of the Composer environment.  Click on the ‘<term>+</term>’ to expand the project:
+</para>
+
+<figure orient="horizontal" id="horfig1">
+<subfigure id="subfig1">
+<media id="idp915568" alt=""><image src="../../media/BeforeExpandingProject.jpg" mime-type="image/jpeg"/></media>
+<caption>Before expanding project</caption>
+</subfigure>
+<subfigure id="subfig2">
+<media id="idp881696" alt=""><image src="../../media/AfterExpandingProject.jpg" mime-type="image/jpeg"/></media>
+<caption>After expanding project</caption>
+</subfigure>
+</figure>
+</section>
+
+<section id="addingfiles">
+<title>Adding New Files to the Project</title>
+<para id="addfiles1">
+In order to add new files, select <term>Project --&gt; Add Files to Project…</term>   The following prompt will appear:
+</para>
+
+<figure id="fig8">
+<media id="idp936800" alt=""><image src="../../media/AddingFilesPrompt.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="addfiles2">
+Select the file you want to add.  To make it easier, you can narrow your search of a particular file by choosing which type of file you want in the <term>Files of type…</term>
+</para>
+
+<para id="addfiles3">
+When you are done, click <term>Open</term>.
+</para>
+
+<para id="addfiles4">
+You should now see the file after clicking on the ‘<term>+</term>’ in the left-hand window:
+</para>
+
+<figure id="fig9">
+<media id="idp905232" alt=""><image src="../../media/ExpandingSource.jpg" mime-type="image/jpeg"/></media>
+</figure>
+</section>
+
+<section id="compilingfiles">
+<title>Compiling Files and Building Projects</title>
+<para id="compfiles1">
+Once you have added all the files you want to be included in your project, you will now need to build your project.  Select <term>Project --&gt; Rebuild All</term>.  You should see the following window at the bottom of the Code Composer Studio Environment:
+</para>
+
+<figure id="fig10">
+<media id="idp1012432" alt=""><image src="../../media/AfterCompilingWindow.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="compfiles2">
+If there are errors in your code, they will be listed with the corresponding line numbers.  Correct them and rebuild your project.
+</para>
+</section>
+
+<section id="loadingprograms">
+<title>Loading/Reloading Programs</title>
+<para id="load1">
+After your code has been successfully compiled and built, you must now load your program onto the DSP.  Select <term>File --&gt; Load Program…</term> You will see the following prompt dialog:
+</para>
+
+<figure id="fig11">
+<media id="idp650496" alt=""><image src="../../media/LoadProgramPrompt.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="load2">
+When you rebuild your project, Code Composer Studio is set at default to create a new folder in your directory called <term>Debug</term>.  This is where the executable file is created.  Double-click on the <term>Debug</term> folder and you should see your <term>*.out</term> file:
+</para>
+
+<figure id="fig12">
+<media id="idp2853616" alt=""><image src="../../media/SelectingOutFilePrompt.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="load3">
+After you select your file, click <term>Open</term>.
+</para>
+</section>
+
+<section id="executing">
+<title>Executing, Halting, or Stopping Your Program</title>
+<para id="execute1">
+To execute your program, select <term>Debug --&gt; Run</term> or press the <term>F5</term> key:
+</para>
+
+<figure id="fig13">
+<media id="idp2884480" alt=""><image src="../../media/SelectingDebugRun.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="execute2">
+Your program will then begin to run.  You will see the following at the bottom left-hand corner of the Code Composer Studio environment:
+</para>
+
+<figure id="fig14">
+<media id="idp570128" alt=""><image src="../../media/CPURunning.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="execute3">
+To stop running your code, select Debug --&gt; Halt:
+</para>
+
+<figure id="fig15">
+<media id="idp2209088" alt=""><image src="../../media/SelectingHaltCPU.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="execute14">
+You should then see the following at the bottom left-hand corner of the work environment:
+</para>
+
+<figure id="fig16">
+<media id="idp2701488" alt=""><image src="../../media/CPUHalted.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="execute15">
+To resume running your code, press the <term>F5</term> button.
+</para>
+</section>
+
+<section id="debuggingcode">
+<title>Debugging Your Code</title>
+<para id="debug1">
+Since there are few of us that can get our code working right the first time, you will probably have to debug your code.  To figure out what could be wrong, there are several methods you can use to break the problem down.
+</para>
+
+<section id="setbreakpoints">
+<title>Setting Breakpoints</title>
+<para id="setbreak1">
+To execute your code a little at a time or to stop it after a certain point, you can place breakpoints.  You can do this by placing the cursor on the line you want to set the breakpoint on, highlighting it by clicking once, and double-click.  You should see a solid red circle on the left:
+</para>
+
+<figure id="fig17">
+<media id="idp1279760" alt=""><image src="../../media/SettingBreakpoint.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="setbreak2">
+You can set as many as you like.  Rebuild and reload the program.  Execute it.  The DSP will stop at the first breakpoint.  To get to the next breakpoint, press the <term>F5</term> button to run the DSP again.
+</para>
+
+<para id="setbreak3">
+To remove the breakpoint(s), place the cursor on the line, highlight it by clicking once, and double-click.  The solid red circle should disappear:
+</para>
+
+<figure id="fig18">
+<media id="idp608032" alt=""><image src="../../media/RemovingBreakpoint.jpg" mime-type="image/jpeg"/></media>
+</figure>
+</section>
+
+<section id="watching">
+<title>Watching Variables</title>
+<para id="watch1">
+To see what values your variables, constants, and/or registers are getting, you can view them in a watch window.  Select <term>View --&gt; Watch Window</term>.  You should see the following appear in the Code Composer Studio environment:
+</para>
+
+<figure id="fig19">
+<media id="idp226336" alt=""><image src="../../media/WatchWindows.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="watch2">
+Click on the ‘Watch 1’ tab:
+</para>
+
+<figure id="fig20">
+<media id="idp683056" alt=""><image src="../../media/ClickOnWatchWindow.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="watch3">
+To add a variable, double-click on the row under the ‘<term>Name</term>’ column:
+</para>
+
+<figure id="fig21">
+<media id="idp694096" alt=""><image src="../../media/SettingAWatchVariable.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="watch4">
+Type in the name of the variable and press the <term>Enter</term> key:
+</para>
+
+<figure id="fig22">
+<media id="idp720496" alt=""><image src="../../media/EnteringAWatchVariable.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="watch5">
+You can change the base of the value by clicking on the ‘<term>Radix</term>’ column and selecting how you want to view the value.
+</para>
+
+<figure id="fig23">
+<media id="idp292512" alt=""><image src="../../media/ChangingBaseInWatchWindow.jpg" mime-type="image/jpeg"/></media>
+</figure>
+</section>
+</section>
+
+<section id="profiling">
+<title>Profiling Sessions</title>
+<para id="profile1">
+You can benchmark your code by profiling a session.  To do this, you can set one breakpoint at the line where you want the counter to start counting and another breakpoint at where to stop.
+</para>
+
+<para id="profile2">
+Select <term>Profiler --&gt; Start New Session…</term>  You will see the following dialog:
+</para>
+
+<figure id="fig24">
+<media id="idp696192" alt=""><image src="../../media/ProfileSesionNameDialog.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="profile3">
+Type in a name for your profile session and click <term>OK</term>.  
+</para>
+
+<para id="profile4">
+A window will appear at the bottom:
+</para>
+
+<figure id="fig25">
+<media id="idm7093456" alt=""><image src="../../media/ProfileWindow.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="profile5">
+To profile a function, you need to add it to the profile session you just created.  Double-click on the file you want to do this in, and place the cursor on any line inside the function and right click.  Choose <term>Profile Function --&gt; in (session-name) Session</term>.
+</para>
+
+<para id="profile6">
+Execute the code.  When the CPU stops, click on the ‘<term>Functions</term>’ tab to see the result of the profiling.
+</para>
+</section>
+
+<section id="counting">
+<title>Counting Clock Cycles</title>
+<para id="count1">
+If you just want to count the cycles and do not need all the stats from profiling, you can just view the clock.  Select<term>Profiler --&gt; View Clock</term>:
+</para>
+
+<figure id="fig26">
+<media id="idp105328" alt=""><image src="../../media/SelectingViewClock.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="count2">
+The following window should appear at the bottom:
+</para>
+
+<figure id="fig27">
+<media id="idp23200" alt=""><image src="../../media/ClockWindow.jpg" mime-type="image/jpeg"/></media>
+</figure>
+
+<para id="count3">
+After setting up your breakpoints, reset the PC to start at the beginning of your code by selecting <term>Debug --&gt; Reset</term>.  Run your code.  Clear the clock by double-clicking on it, and then run it again.  The number of clock cycles will appear in the clock window.
+</para>
+</section>
+
+<section id="trouble">
+<title>Troubleshooting</title>
+<para id="trouble1">
+If you are having any trouble, sometimes it is best to reset the CPU.  You can do this by selecting <term>Debug --&gt; Restart CPU</term>.  You will have to reload the program.
+</para>
+
+<para id="trouble2">
+Another option is to simply quit Code Composer Studio by selecting <term>File --&gt; Quit</term> and restart the application.
+</para>
+</section>
+
+
+
+
+
+
+   
+ 
+  </content>
+  
+</document>
